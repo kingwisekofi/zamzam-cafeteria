@@ -93,7 +93,6 @@
                     <svg class="w-4 h-4 text-stone-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 </div>
 
-                <!-- Scrolls smoothly to the side-by-side / bottom cart panel without dimming the screen -->
                 <a href="#order-cart-panel" class="relative bg-dark-800 hover:bg-dark-700 border border-dark-700 text-white px-3 py-2.5 rounded-xl shadow-lg flex items-center space-x-2 transition">
                     <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -123,7 +122,7 @@
                     Where The Flavour <span class="text-gold-400">Inspired You.</span>
                 </h2>
                 <p class="text-xs sm:text-sm text-stone-300 mt-3 leading-relaxed">
-                    مطعم وكافتيريا زمزم الورسان — Browse the menu on the left and build your order live on the right without losing sight of your dishes. Pin your exact GPS location for fast delivery!
+                    مطعم وكافتيريا زمزم الورسان — Select dishes on the left, then fill in your delivery details and click the WhatsApp order button on the right tray below.
                 </p>
                 <div class="flex flex-wrap items-center gap-2.5 mt-6">
                     <a href="#store-catalog" onclick="filterCatalog('charcoal')" class="inline-flex items-center space-x-1.5 bg-gold-500 hover:bg-gold-400 text-dark-950 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-lg transition">
@@ -148,7 +147,7 @@
         <div class="flex flex-col lg:flex-row items-start gap-8 mb-16">
             
             <!-- LEFT COLUMN: MENU CATALOG -->
-            <div class="w-full lg:w-[66%] xl:w-[68%]">
+            <div class="w-full lg:w-[64%] xl:w-[66%]">
                 <!-- Category Filter Tabs -->
                 <div id="store-catalog" class="scroll-mt-24 flex items-center justify-between flex-wrap gap-3 mb-5">
                     <div class="flex items-center space-x-2 overflow-x-auto no-scrollbar pb-2">
@@ -169,28 +168,29 @@
                 <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"></div>
             </div>
 
-            <!-- RIGHT COLUMN: STICKY SIDE-BY-SIDE ORDER CART & GPS LOCATION -->
-            <aside id="order-cart-panel" class="w-full lg:w-[34%] xl:w-[32%] lg:sticky lg:top-24 scroll-mt-24">
-                <div class="bg-dark-800 border border-dark-700 rounded-3xl shadow-2xl overflow-hidden flex flex-col">
+            <!-- RIGHT COLUMN: STICKY ORDER TRAY & CHECKOUT -->
+            <aside id="order-cart-panel" class="w-full lg:w-[36%] xl:w-[34%] lg:sticky lg:top-24 scroll-mt-24">
+                <div class="bg-dark-800 border border-dark-700 rounded-3xl shadow-2xl flex flex-col overflow-hidden">
+                    
                     <!-- Cart Header -->
-                    <div class="p-4 bg-dark-950 border-b border-dark-700 flex items-center justify-between">
+                    <div class="p-3.5 bg-dark-950 border-b border-dark-700 flex items-center justify-between shrink-0">
                         <div class="flex items-center space-x-2">
-                            <span class="text-lg">🍽️</span>
-                            <h3 class="text-base font-extrabold text-white">Your ZamZam Order</h3>
+                            <span class="text-base">🍽️</span>
+                            <h3 class="text-sm font-extrabold text-white">Your ZamZam Order Tray</h3>
                         </div>
-                        <button onclick="clearCart()" class="text-xs text-stone-400 hover:text-crimson-500 transition font-medium">Clear All</button>
+                        <button onclick="clearCart()" class="text-[11px] text-stone-400 hover:text-crimson-500 transition font-medium">Clear All</button>
                     </div>
 
-                    <!-- Live Cart Items List -->
-                    <div id="cart-items-container" class="max-h-72 overflow-y-auto p-4 space-y-3 divide-y divide-dark-700/60"></div>
+                    <!-- Live Cart Items List (Scrollable if many items) -->
+                    <div id="cart-items-container" class="max-h-48 overflow-y-auto p-3.5 space-y-2.5 divide-y divide-dark-700/60 bg-dark-900/50"></div>
 
-                    <!-- Delivery & GPS Section -->
-                    <div class="p-4 bg-dark-900 border-t border-dark-700 space-y-3.5">
+                    <!-- Delivery & Checkout Controls (Always Visible) -->
+                    <div class="p-3.5 bg-dark-900 border-t border-dark-700 space-y-3 shrink-0">
                         
                         <!-- Zone Select -->
                         <div>
-                            <label class="block text-[11px] font-bold uppercase tracking-wider text-stone-300 mb-1">Delivery Area / Pickup</label>
-                            <select id="delivery-location" onchange="updateCartTotals()" class="w-full bg-dark-800 border border-dark-600 rounded-xl px-3 py-2 text-white text-xs focus:outline-none focus:border-gold-500 transition">
+                            <label class="block text-[10px] font-bold uppercase tracking-wider text-stone-300 mb-1">Delivery Area / Pickup</label>
+                            <select id="delivery-location" onchange="updateCartTotals()" class="w-full bg-dark-800 border border-dark-600 rounded-xl px-2.5 py-2 text-white text-xs focus:outline-none focus:border-gold-500 transition">
                                 <option value="0">Al Warsan 4 / Phase 2 (FREE Delivery)</option>
                                 <option value="0">International City Clusters (FREE Delivery)</option>
                                 <option value="0">Al Warqa / Nad Al Sheba (FREE Delivery)</option>
@@ -205,21 +205,21 @@
                         </div>
 
                         <!-- GPS Location Pinning Box -->
-                        <div class="bg-dark-800/90 border border-dark-700 rounded-xl p-3 space-y-2">
+                        <div class="bg-dark-800/90 border border-dark-700 rounded-xl p-2.5 space-y-1.5">
                             <div class="flex items-center justify-between gap-2">
-                                <span class="text-[11px] font-bold uppercase tracking-wider text-gold-400 flex items-center gap-1">
-                                    <span>📍</span> GPS Delivery Pin
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-gold-400 flex items-center gap-1">
+                                    <span>📍</span> GPS Pin
                                 </span>
-                                <button type="button" onclick="detectGPSLocation()" id="gps-btn" class="bg-dark-700 hover:bg-gold-500 hover:text-dark-950 text-gold-400 border border-gold-500/30 text-[11px] font-bold px-2.5 py-1 rounded-lg transition flex items-center gap-1">
-                                    <span>🎯</span><span>Share My Live GPS</span>
+                                <button type="button" onclick="detectGPSLocation()" id="gps-btn" class="bg-dark-700 hover:bg-gold-500 hover:text-dark-950 text-gold-400 border border-gold-500/30 text-[10px] font-bold px-2 py-1 rounded-lg transition flex items-center gap-1">
+                                    <span>🎯</span><span>Share Live GPS</span>
                                 </button>
                             </div>
-                            <input type="text" id="customer-gps-link" placeholder="Auto-filled via GPS or paste Google Maps link" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-2.5 py-1.5 text-[11px] text-stone-200 placeholder-stone-500 focus:outline-none focus:border-gold-500 transition">
-                            <p id="gps-status" class="text-[10px] text-stone-400 leading-tight">Tap "Share My Live GPS" so our driver gets your exact Google Maps pin.</p>
+                            <input type="text" id="customer-gps-link" placeholder="Auto-filled via GPS or paste Google Maps link" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-2 py-1 text-[11px] text-stone-200 placeholder-stone-500 focus:outline-none focus:border-gold-500 transition">
+                            <p id="gps-status" class="text-[10px] text-stone-400 leading-tight">Tap "Share Live GPS" so driver gets your exact Google Maps pin.</p>
                         </div>
 
                         <!-- Totals -->
-                        <div class="space-y-1 text-xs pt-2 border-t border-dark-800">
+                        <div class="space-y-1 text-xs pt-1 border-t border-dark-800">
                             <div class="flex justify-between text-stone-300">
                                 <span>Subtotal (VAT Incl.)</span>
                                 <span id="cart-subtotal" class="font-semibold text-white">AED 0.00</span>
@@ -228,17 +228,18 @@
                                 <span>Home Delivery</span>
                                 <span id="cart-delivery-fee" class="font-semibold text-gold-400">FREE (AED 0.00)</span>
                             </div>
-                            <div class="flex justify-between text-sm font-extrabold text-white pt-1.5 border-t border-dark-700">
+                            <div class="flex justify-between text-sm font-extrabold text-white pt-1 border-t border-dark-700">
                                 <span>Grand Total</span>
                                 <span id="cart-grand-total" class="text-gold-400">AED 0.00</span>
                             </div>
                         </div>
 
-                        <!-- WhatsApp Checkout CTA -->
-                        <button onclick="checkoutWhatsApp()" class="w-full bg-gold-500 hover:bg-gold-400 text-dark-950 font-extrabold py-3 px-4 rounded-xl shadow-lg flex items-center justify-center space-x-2 transition text-sm">
-                            <span>Order Now via WhatsApp</span>
+                        <!-- WhatsApp Checkout CTA Button -->
+                        <button onclick="checkoutWhatsApp()" class="w-full bg-gold-500 hover:bg-gold-400 active:scale-[0.98] text-dark-950 font-extrabold py-3 px-4 rounded-xl shadow-lg flex items-center justify-center space-x-2 transition text-xs">
+                            <span>📲 Order Now via WhatsApp</span>
                         </button>
                     </div>
+
                 </div>
             </aside>
 
@@ -594,20 +595,20 @@
             filtered.forEach(p => {
                 const meta = categoryMeta[p.category] || { label: p.category, icon: '🍽️' };
                 const inCart = cart.find(item => item.id === p.id);
-                const qtyBadge = inCart ? `<span class="bg-gold-500 text-dark-950 text-[11px] font-extrabold px-2 py-0.5 rounded-full">${inCart.quantity} in tray</span>` : '';
+                const qtyBadge = inCart ? `<span class="bg-gold-500 text-dark-950 text-[10px] font-extrabold px-2 py-0.5 rounded-full">${inCart.quantity} in tray</span>` : '';
 
                 const imageHtml = p.image ? 
-                    `<div class="relative mb-3">
-                        <img src="${p.image}" alt="${p.name}" class="w-full h-36 object-cover rounded-xl">
+                    `<div class="relative mb-2.5">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-32 object-cover rounded-xl">
                         <span class="absolute top-2 left-2 bg-dark-950/90 text-gold-400 border border-gold-500/40 text-xs font-extrabold px-2 py-0.5 rounded-lg">#${p.code}</span>
                      </div>` :
-                    `<div class="relative w-full h-28 bg-dark-900 rounded-xl mb-3 flex items-center justify-center border border-dark-700 text-3xl">
+                    `<div class="relative w-full h-24 bg-dark-900 rounded-xl mb-2.5 flex items-center justify-center border border-dark-700 text-3xl">
                         <span>${meta.icon}</span>
                         <span class="absolute top-2 left-2 bg-dark-950 text-gold-400 border border-gold-500/30 text-xs font-extrabold px-2 py-0.5 rounded-lg">#${p.code}</span>
                      </div>`;
 
                 const card = document.createElement('div');
-                card.className = `bg-dark-800 border ${inCart ? 'border-gold-500/60' : 'border-dark-700'} rounded-2xl p-3.5 flex flex-col justify-between shadow-lg transition hover:border-gold-500/50`;
+                card.className = `bg-dark-800 border ${inCart ? 'border-gold-500/60' : 'border-dark-700'} rounded-2xl p-3 flex flex-col justify-between shadow-lg transition hover:border-gold-500/50`;
                 card.innerHTML = `
                     <div>
                         ${imageHtml}
@@ -615,15 +616,15 @@
                             <span class="text-[10px] uppercase tracking-wider text-stone-400 font-semibold">${meta.label}</span>
                             ${qtyBadge}
                         </div>
-                        <h3 class="font-bold text-white text-sm leading-snug mb-1">${p.name}</h3>
-                        <p class="text-[11px] text-stone-400 mb-2.5">${p.unit}</p>
+                        <h3 class="font-bold text-white text-xs leading-snug mb-1">${p.name}</h3>
+                        <p class="text-[11px] text-stone-400 mb-2">${p.unit}</p>
                     </div>
                     <div>
-                        <div class="flex items-baseline justify-between mb-2.5 pt-2 border-t border-dark-700/70">
-                            <span class="text-gold-400 font-extrabold text-base">AED ${Number(p.price).toFixed(2)}</span>
-                            <span class="text-[10px] text-stone-400 uppercase">VAT Incl.</span>
+                        <div class="flex items-baseline justify-between mb-2 pt-2 border-t border-dark-700/70">
+                            <span class="text-gold-400 font-extrabold text-sm">AED ${Number(p.price).toFixed(2)}</span>
+                            <span class="text-[9px] text-stone-400 uppercase">VAT Incl.</span>
                         </div>
-                        <button onclick="addToCart('${p.id}')" class="w-full bg-crimson-600 hover:bg-crimson-500 active:scale-[0.98] text-white font-bold py-2 px-3 rounded-xl shadow transition text-xs">
+                        <button onclick="addToCart('${p.id}')" class="w-full bg-crimson-600 hover:bg-crimson-500 active:scale-[0.98] text-white font-bold py-1.5 px-3 rounded-xl shadow transition text-xs">
                             + Add to Order
                         </button>
                     </div>
@@ -646,7 +647,6 @@
             renderCatalog();
         }
 
-        // Adds item seamlessly side-by-side without dimming or blocking the menu
         function addToCart(productId) {
             const product = products.find(p => p.id === productId);
             if (!product) return;
@@ -688,17 +688,17 @@
             container.innerHTML = '';
             if (cart.length === 0) {
                 container.innerHTML = `
-                    <div class="text-center py-8 px-2">
-                        <p class="text-2xl mb-1">🛒</p>
+                    <div class="text-center py-6 px-2">
+                        <p class="text-xl mb-1">🛒</p>
                         <p class="text-xs text-stone-300 font-semibold">Your order tray is empty</p>
-                        <p class="text-[11px] text-stone-400 mt-1">Click "+ Add to Order" on any dish on the left to build your order live.</p>
+                        <p class="text-[10px] text-stone-400 mt-0.5">Click "+ Add to Order" on any dish to build your order live.</p>
                     </div>`;
                 updateCartTotals();
                 return;
             }
             cart.forEach(item => {
                 const div = document.createElement('div');
-                div.className = 'pt-3 first:pt-0 flex items-center justify-between gap-2';
+                div.className = 'pt-2.5 first:pt-0 flex items-center justify-between gap-2';
                 div.innerHTML = `
                     <div class="pr-2">
                         <h4 class="font-bold text-white text-xs leading-snug"><span class="text-gold-400">#${item.code}</span> ${item.name}</h4>
@@ -724,19 +724,18 @@
             document.getElementById('cart-grand-total').innerText = `AED ${grandTotal.toFixed(2)}`;
         }
 
-        // HTML5 Geolocation API to generate exact Google Maps pin for delivery
         function detectGPSLocation() {
             const statusEl = document.getElementById('gps-status');
             const gpsInput = document.getElementById('customer-gps-link');
             const gpsBtn = document.getElementById('gps-btn');
 
             if (!navigator.geolocation) {
-                statusEl.innerText = 'GPS is not supported by your browser. Please paste your Google Maps link above.';
+                statusEl.innerText = 'GPS not supported. Please paste your Google Maps link.';
                 statusEl.className = 'text-[10px] text-crimson-500';
                 return;
             }
 
-            statusEl.innerText = 'Detecting your GPS coordinates... Please allow location access.';
+            statusEl.innerText = 'Detecting GPS coordinates...';
             statusEl.className = 'text-[10px] text-gold-400 animate-pulse';
             gpsBtn.disabled = true;
 
@@ -746,16 +745,12 @@
                     const lng = position.coords.longitude.toFixed(6);
                     const mapsUrl = `https://maps.google.com/?q=${lat},${lng}`;
                     gpsInput.value = mapsUrl;
-                    statusEl.innerText = `✅ GPS Pinned (${lat}, ${lng}) — Ready to send with order!`;
+                    statusEl.innerText = `✅ GPS Pinned (${lat}, ${lng})`;
                     statusEl.className = 'text-[10px] text-emerald-400 font-medium';
                     gpsBtn.disabled = false;
                 },
                 (error) => {
-                    let errMsg = 'Unable to get GPS location. Please enable location permissions or paste your Maps link.';
-                    if (error.code === error.PERMISSION_DENIED) {
-                        errMsg = '⚠️ Location permission denied. Enable GPS in browser settings or paste a Maps link.';
-                    }
-                    statusEl.innerText = errMsg;
+                    statusEl.innerText = '⚠️ Location permission denied or unavailable.';
                     statusEl.className = 'text-[10px] text-crimson-500';
                     gpsBtn.disabled = false;
                 },
@@ -764,7 +759,7 @@
         }
 
         function checkoutWhatsApp() {
-            if (cart.length === 0) { alert('Your order tray is empty. Add items from the menu first.'); return; }
+            if (cart.length === 0) { alert('Your order tray is empty. Add dishes from the menu first.'); return; }
             const name = document.getElementById('customer-name').value.trim();
             const address = document.getElementById('customer-address').value.trim();
             const gpsLink = document.getElementById('customer-gps-link').value.trim();
