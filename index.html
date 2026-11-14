@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZamZam Restaurant & Cafeteria | Al Warsan, Dubai</title>
+    <title>ZamZam Restaurant & Cafeteria | Direct Ordering System</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -44,11 +44,11 @@
     <div class="bg-dark-950 border-b border-dark-800 text-xs text-stone-300">
         <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
             <div class="flex items-center space-x-1.5 text-gold-400 font-medium">
-                <span>🛵</span>
-                <span>FREE HOME DELIVERY • All Prices VAT Inclusive (AED)</span>
+                <span>⚡</span>
+                <span>DIRECT KITCHEN SYSTEM • All Prices VAT Inclusive (AED)</span>
             </div>
             <div class="font-semibold text-white">
-                Order Desk: <a href="https://wa.me/971554040547" target="_blank" class="text-gold-400 hover:underline">055 404 0547</a> / <a href="tel:045693722" class="text-stone-300 hover:text-white">04 569 3722</a>
+                Live Kitchen Desk: <a href="tel:045693722" class="text-gold-400 hover:underline">04 569 3722</a> / <a href="tel:0554040547" class="text-stone-300 hover:text-white">055 404 0547</a>
             </div>
             <div class="hidden md:flex items-center space-x-1 text-stone-400">
                 <svg class="w-3.5 h-3.5 text-crimson-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
@@ -70,7 +70,7 @@
                     <h1 class="text-base sm:text-lg font-extrabold tracking-wide text-white uppercase leading-tight">
                         ZAMZAM <span class="text-gold-400">CAFETERIA</span>
                     </h1>
-                    <p class="text-[10px] tracking-[0.18em] text-stone-400 font-semibold uppercase">WHERE THE FLAVOUR INSPIRED YOU</p>
+                    <p class="text-[10px] tracking-[0.18em] text-stone-400 font-semibold uppercase">DIRECT ONLINE ORDERING</p>
                 </div>
             </a>
 
@@ -86,12 +86,17 @@
                 <a href="#store-catalog" onclick="filterCatalog('juices')" class="hover:text-gold-400 transition">🥤 Juices & Tea</a>
             </nav>
 
-            <!-- Search Bar & Mobile Cart Jump Button -->
+            <!-- Search Bar, Orders Dashboard Toggle & Cart Jump Button -->
             <div class="flex items-center space-x-3 flex-grow sm:flex-grow-0 justify-end">
                 <div class="relative hidden sm:block w-52 md:w-64">
                     <input type="text" id="catalog-search" onkeyup="renderCatalog()" placeholder="Search item # or dish name..." class="w-full bg-dark-800 border border-dark-700 rounded-full pl-9 pr-4 py-2 text-xs text-white placeholder-stone-400 focus:outline-none focus:border-gold-500 transition">
                     <svg class="w-4 h-4 text-stone-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 </div>
+
+                <button onclick="toggleOrdersDashboard()" class="hidden sm:flex items-center space-x-1.5 bg-dark-800 hover:bg-dark-700 border border-dark-700 text-gold-400 px-3 py-2.5 rounded-xl text-xs font-bold transition shadow">
+                    <span>📋 Live Orders</span>
+                    <span id="orders-dashboard-badge" class="bg-gold-500 text-dark-950 px-1.5 py-0.2 rounded-full text-[10px]">0</span>
+                </button>
 
                 <a href="#order-cart-panel" class="relative bg-dark-800 hover:bg-dark-700 border border-dark-700 text-white px-3 py-2.5 rounded-xl shadow-lg flex items-center space-x-2 transition">
                     <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -107,7 +112,7 @@
     <!-- Main Content Container -->
     <main class="flex-grow max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-        <!-- Restaurant Hero Banner with Integrated Delivery Highlights -->
+        <!-- Restaurant Hero Banner -->
         <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-dark-950 via-dark-800 to-crimson-700/40 border border-gold-500/20 p-6 sm:p-10 mb-8 shadow-2xl">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div class="lg:col-span-7 relative z-10">
@@ -116,35 +121,35 @@
                             AL WARSAN 4 • INTERNATIONAL CITY
                         </span>
                         <span class="inline-block text-[11px] uppercase tracking-widest text-white font-bold bg-crimson-600 px-3 py-1.5 rounded-full">
-                            FREE HOME DELIVERY
+                            DIRECT KITCHEN SUBMISSION
                         </span>
                     </div>
                     <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
                         Where The Flavour <span class="text-gold-400">Inspired You.</span>
                     </h2>
                     <p class="text-xs sm:text-sm text-stone-300 mt-3 leading-relaxed">
-                        مطعم وكافتيريا زمزم الورسان — Browse our authentic menu on the left, build your order live, share your exact GPS pin, and get your food delivered hot to your doorstep!
+                        مطعم وكافتيريا زمزم الورسان — Place your order directly into the ZamZam kitchen live backend system with 1-click confirmation. No WhatsApp required!
                     </p>
                     <div class="flex flex-wrap items-center gap-2.5 mt-6">
                         <a href="#store-catalog" onclick="filterCatalog('charcoal')" class="inline-flex items-center space-x-1.5 bg-gold-500 hover:bg-gold-400 text-dark-950 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-lg transition">
                             <span>🔥</span><span>Charcoal & Grill</span>
                         </a>
-                        <a href="#store-catalog" onclick="filterCatalog('broasted')" class="inline-flex items-center space-x-1.5 bg-crimson-600 hover:bg-crimson-500 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-lg transition">
-                            <span>🍗</span><span>Broasted Meals</span>
-                        </a>
+                        <button onclick="toggleOrdersDashboard()" class="inline-flex items-center space-x-1.5 bg-dark-800 hover:bg-dark-700 text-gold-400 border border-gold-500/40 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-lg transition">
+                            <span>📋</span><span>View Kitchen Orders Dashboard</span>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Featured Delivery Photography Integration -->
+                <!-- Featured Photography Integration -->
                 <div class="lg:col-span-5 grid grid-cols-2 gap-3 relative z-10">
                     <div class="relative overflow-hidden rounded-2xl border-2 border-gold-500/40 shadow-xl group">
-                        <img src="rider.avif" alt="ZamZam Delivery Rider" class="w-full h-44 sm:h-52 object-cover group-hover:scale-105 transition duration-500">
+                        <img src="rider.avif" alt="ZamZam Delivery Rider" class="w-full h-44 sm:h-52 object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/300x200/221D1A/F59E0B?text=ZamZam+Delivery'">
                         <div class="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent flex items-end p-3">
-                            <span class="text-xs font-bold text-gold-400 bg-dark-950/80 px-2.5 py-1 rounded-lg border border-gold-500/30">⚡ Express Delivery</span>
+                            <span class="text-xs font-bold text-gold-400 bg-dark-950/80 px-2.5 py-1 rounded-lg border border-gold-500/30">⚡ Express Direct Delivery</span>
                         </div>
                     </div>
                     <div class="relative overflow-hidden rounded-2xl border-2 border-gold-500/40 shadow-xl group mt-4 sm:mt-6">
-                        <img src="received.avif" alt="Customer Receiving Order" class="w-full h-44 sm:h-52 object-cover group-hover:scale-105 transition duration-500">
+                        <img src="received.avif" alt="Customer Receiving Order" class="w-full h-44 sm:h-52 object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/300x200/221D1A/DC2626?text=Hot+Fresh+Meal'">
                         <div class="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent flex items-end p-3">
                             <span class="text-xs font-bold text-white bg-crimson-600/90 px-2.5 py-1 rounded-lg">🏡 Hot & Fresh</span>
                         </div>
@@ -154,8 +159,9 @@
         </div>
 
         <!-- Mobile Search Bar -->
-        <div class="sm:hidden mb-6">
-            <input type="text" id="catalog-search-mobile" onkeyup="syncSearch(this.value)" placeholder="Search dish name or menu number (e.g. #22, Karak)..." class="w-full bg-dark-800 border border-dark-700 rounded-xl px-4 py-3 text-sm text-white placeholder-stone-400 focus:outline-none focus:border-gold-500">
+        <div class="sm:hidden mb-6 flex gap-2">
+            <input type="text" id="catalog-search-mobile" onkeyup="syncSearch(this.value)" placeholder="Search dish name or item # (e.g. #22)..." class="w-full bg-dark-800 border border-dark-700 rounded-xl px-4 py-3 text-sm text-white placeholder-stone-400 focus:outline-none focus:border-gold-500">
+            <button onclick="toggleOrdersDashboard()" class="bg-dark-800 border border-gold-500/40 text-gold-400 px-4 rounded-xl text-xs font-bold shrink-0">📋 Orders</button>
         </div>
 
         <!-- SIDE-BY-SIDE LAYOUT: MENU (LEFT) + LIVE CART (RIGHT) -->
@@ -183,7 +189,7 @@
                 <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"></div>
             </div>
 
-            <!-- RIGHT COLUMN: STICKY ORDER TRAY & CHECKOUT -->
+            <!-- RIGHT COLUMN: STICKY ORDER TRAY & DIRECT CHECKOUT -->
             <aside id="order-cart-panel" class="w-full lg:w-[36%] xl:w-[34%] lg:sticky lg:top-24 scroll-mt-24">
                 <div class="bg-dark-800 border border-dark-700 rounded-3xl shadow-2xl flex flex-col overflow-hidden">
                     
@@ -249,9 +255,9 @@
                             </div>
                         </div>
 
-                        <!-- WhatsApp Checkout CTA Button -->
-                        <button onclick="checkoutWhatsApp()" class="w-full bg-gold-500 hover:bg-gold-400 active:scale-[0.98] text-dark-950 font-extrabold py-3 px-4 rounded-xl shadow-lg flex items-center justify-center space-x-2 transition text-xs">
-                            <span>📲 Order Now via WhatsApp</span>
+                        <!-- Direct Order Button (No WhatsApp needed!) -->
+                        <button onclick="submitDirectOrder()" class="w-full bg-gold-500 hover:bg-gold-400 active:scale-[0.98] text-dark-950 font-extrabold py-3.5 px-4 rounded-xl shadow-lg flex items-center justify-center space-x-2 transition text-xs">
+                            <span>⚡ Submit Direct Kitchen Order</span>
                         </button>
                     </div>
 
@@ -260,44 +266,78 @@
 
         </div>
 
-        <!-- Party Catering / Custom Order Section -->
-        <div id="catering-section" class="scroll-mt-24 bg-dark-800 border border-dark-700 rounded-3xl p-6 sm:p-10 mb-16 shadow-xl">
-            <div class="max-w-2xl mx-auto">
-                <div class="text-center mb-6">
-                    <span class="text-xs uppercase tracking-widest text-gold-400 font-semibold bg-dark-950/60 px-3 py-1 rounded-full border border-gold-500/20">Direct Kitchen & Catering Desk</span>
-                    <h3 class="text-xl sm:text-2xl font-bold text-white mt-3">Party Buckets, Office Lunch & Custom Orders</h3>
-                    <p class="text-sm text-stone-400 mt-1">Planning a gathering in International City or Al Warsan? Send a custom order or inquire about seasonal seafood (ASP) prices directly via WhatsApp.</p>
+    </main>
+
+    <!-- DIRECT ORDER CONFIRMATION / RECEIPT MODAL -->
+    <div id="order-success-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+        <div class="fixed inset-0 bg-black/85 backdrop-blur-sm transition-opacity" onclick="closeSuccessModal()"></div>
+        <div class="flex items-center justify-center min-h-screen p-4 relative z-10">
+            <div class="bg-dark-800 border border-gold-500/50 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative">
+                <div class="text-center pb-4 border-b border-dark-700 mb-6">
+                    <div class="w-16 h-16 bg-gold-500/20 border-2 border-gold-500 rounded-full flex items-center justify-center mx-auto mb-3 text-3xl">
+                        🎉
+                    </div>
+                    <span class="text-[11px] uppercase tracking-widest text-gold-400 font-bold bg-dark-950 px-3 py-1 rounded-full border border-gold-500/30">Order Successfully Received!</span>
+                    <h3 class="text-xl sm:text-2xl font-extrabold text-white mt-3">Sent Directly to ZamZam Kitchen</h3>
+                    <p id="receipt-order-id" class="text-xs text-stone-400 mt-1 font-mono">Order #ZZ-98421</p>
                 </div>
-                
-                <div class="space-y-4 bg-dark-900 p-5 sm:p-6 rounded-2xl border border-dark-700">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-300 mb-2">Order Type</label>
-                            <select id="rx-dept" class="w-full bg-dark-800 border border-dark-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold-500 transition text-sm">
-                                <option value="Home / Office Delivery">🛵 Home / Office Delivery</option>
-                                <option value="Party Bucket / Majlis Platter">🎉 Party Bucket / Majlis Platter</option>
-                                <option value="Seasonal Fish (Sheri / Hamour) Price Check">🐟 Seasonal Fish (Sheri / Hamour) Inquiry</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-300 mb-2">Your Name</label>
-                            <input type="text" id="rx-name" placeholder="Enter your name" class="w-full bg-dark-800 border border-dark-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold-500 transition text-sm">
-                        </div>
-                    </div>
 
+                <div class="space-y-4 bg-dark-900 p-4 rounded-2xl border border-dark-700 text-xs">
+                    <div class="flex justify-between border-b border-dark-800 pb-2">
+                        <span class="text-stone-400">Customer Name:</span>
+                        <span id="receipt-name" class="font-bold text-white"></span>
+                    </div>
+                    <div class="flex justify-between border-b border-dark-800 pb-2">
+                        <span class="text-stone-400">Delivery Address:</span>
+                        <span id="receipt-address" class="font-bold text-white text-right"></span>
+                    </div>
+                    <div class="flex justify-between border-b border-dark-800 pb-2">
+                        <span class="text-stone-400">GPS Pin:</span>
+                        <span id="receipt-gps" class="font-bold text-gold-400 truncate max-w-[200px]"></span>
+                    </div>
                     <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-stone-300 mb-2">Order Details / Spice Preference</label>
-                        <textarea id="rx-details" rows="3" placeholder="e.g., 2x Party Meals (#26), extra garlic paste, less spicy..." class="w-full bg-dark-800 border border-dark-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold-500 transition text-sm"></textarea>
+                        <p class="font-bold text-stone-300 mb-2">Ordered Dishes:</p>
+                        <div id="receipt-items-list" class="space-y-1.5 max-h-36 overflow-y-auto pr-1"></div>
                     </div>
+                    <div class="flex justify-between font-extrabold text-sm pt-3 border-t border-dark-700 text-white">
+                        <span>Grand Total Paid on Delivery:</span>
+                        <span id="receipt-total" class="text-gold-400"></span>
+                    </div>
+                </div>
 
-                    <button onclick="sendInquiryWhatsApp()" class="w-full bg-crimson-600 hover:bg-crimson-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg transition">
-                        Send Order Inquiry via WhatsApp
+                <div class="mt-6 space-y-3">
+                    <div class="bg-dark-950/80 p-3 rounded-xl border border-dark-700 text-center">
+                        <p class="text-xs text-emerald-400 font-bold">🟢 Kitchen Status: Preparing your food hot & fresh!</p>
+                        <p class="text-[11px] text-stone-400 mt-0.5">Estimated Delivery Time: 20 - 30 minutes in Al Warsan / International City.</p>
+                    </div>
+                    <button onclick="closeSuccessModal()" class="w-full bg-gold-500 hover:bg-gold-400 text-dark-950 font-extrabold py-3 rounded-xl text-xs transition shadow-lg">
+                        Done / Place Another Order
                     </button>
                 </div>
             </div>
         </div>
+    </div>
 
-    </main>
+    <!-- LIVE ORDERS DASHBOARD MODAL (MOCK BACKEND VIEW) -->
+    <div id="orders-dashboard-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+        <div class="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity" onclick="toggleOrdersDashboard()"></div>
+        <div class="flex items-center justify-center min-h-screen p-4 relative z-10">
+            <div class="bg-dark-800 border border-dark-700 rounded-3xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl relative">
+                <div class="flex items-center justify-between pb-4 border-b border-dark-700 mb-6">
+                    <div>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-gold-400 bg-dark-950 px-2.5 py-1 rounded-full border border-gold-500/30">Live Kitchen Backend</span>
+                        <h3 class="text-xl font-bold text-white mt-1">ZamZam Live Orders Feed</h3>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="clearAllDashboardOrders()" class="text-xs text-crimson-500 hover:underline">Clear Feed</button>
+                        <button onclick="toggleOrdersDashboard()" class="text-stone-400 hover:text-white p-2 rounded-lg bg-dark-900 hover:bg-dark-700 transition">✕</button>
+                    </div>
+                </div>
+
+                <div id="dashboard-orders-container" class="space-y-3 max-h-96 overflow-y-auto pr-2"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Admin Modal -->
     <div id="admin-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
@@ -367,7 +407,7 @@
                 <div>
                     <p class="font-bold text-white text-sm mb-1">ZamZam Al Warsan Restaurant & Cafeteria</p>
                     <p>Al Ameera Building, Al Warsan - 4, Phase 2, International City - Dubai</p>
-                    <p class="text-gold-400 mt-1">Free Home Delivery: 04 569 3722 | 055 404 0547 | 055 418 8740</p>
+                    <p class="text-gold-400 mt-1">Direct Kitchen Desk: 04 569 3722 | 055 404 0547</p>
                 </div>
                 <div>
                     <p class="font-bold text-white text-sm mb-1">Our Sister Branches</p>
@@ -385,15 +425,16 @@
 
             <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
                 <p class="text-xs text-stone-400">© 2026 ZamZam Cafeteria & Restaurant. All Rights Reserved.</p>
-                <button onclick="toggleAdminModal()" class="text-xs bg-dark-800 hover:bg-dark-700 px-3.5 py-2 rounded-lg border border-dark-700 text-gold-400 font-medium transition">Menu Manager</button>
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleOrdersDashboard()" class="text-xs bg-dark-800 hover:bg-dark-700 px-3.5 py-2 rounded-lg border border-dark-700 text-gold-400 font-medium transition">📋 Live Orders Dashboard</button>
+                    <button onclick="toggleAdminModal()" class="text-xs bg-dark-800 hover:bg-dark-700 px-3.5 py-2 rounded-lg border border-dark-700 text-stone-300 font-medium transition">Menu Manager</button>
+                </div>
             </div>
         </div>
     </footer>
 
     <!-- Script Logic -->
     <script>
-        const STORE_WHATSAPP = '971554040547';
-
         const defaultMenu = [
             // CHARCOAL & GRILL (Items 1 - 21)
             { id: 'zz1', code: '01', name: 'Pepper Chicken Charcoal (Half)', category: 'charcoal', price: 23, unit: 'Half (Full AED 43)', stock: 'in-stock', image: '' },
@@ -567,11 +608,13 @@
         let products = JSON.parse(localStorage.getItem('zamzam_menu_v1')) || defaultMenu;
         let cart = [];
         let currentFilter = 'all';
+        let ordersBackend = JSON.parse(localStorage.getItem('zamzam_backend_orders')) || [];
 
         document.addEventListener('DOMContentLoaded', () => {
             renderCatalog();
             renderCartItems();
             updateCartBadge();
+            updateOrdersDashboardBadge();
         });
 
         function syncSearch(val) {
@@ -618,7 +661,7 @@
 
                 const imageHtml = p.image ? 
                     `<div class="relative mb-2.5">
-                        <img src="${p.image}" alt="${p.name}" class="w-full h-32 object-cover rounded-xl">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-32 object-cover rounded-xl" onerror="this.src='https://placehold.co/300x200/221D1A/F59E0B?text=ZamZam+Dish'">
                         <span class="absolute top-2 left-2 bg-dark-950/90 text-gold-400 border border-gold-500/40 text-xs font-extrabold px-2 py-0.5 rounded-lg">#${p.code}</span>
                      </div>` :
                     `<div class="relative w-full h-24 bg-dark-900 rounded-xl mb-2.5 flex items-center justify-center border border-dark-700 text-3xl">
@@ -777,42 +820,129 @@
             );
         }
 
-        function checkoutWhatsApp() {
+        function submitDirectOrder() {
             if (cart.length === 0) { alert('Your order tray is empty. Add dishes from the menu first.'); return; }
             const name = document.getElementById('customer-name').value.trim();
             const address = document.getElementById('customer-address').value.trim();
             const gpsLink = document.getElementById('customer-gps-link').value.trim();
 
             if (!name || (!address && !gpsLink)) {
-                alert('Please enter your Name/Phone and either your Building Address or GPS Pin.');
+                alert('Please enter your Name & Phone, and either your Building Address or GPS Pin.');
                 return;
             }
 
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const deliverySelect = document.getElementById('delivery-location');
             const deliveryLocationName = deliverySelect.options[deliverySelect.selectedIndex].text;
+            const orderId = 'ZZ-' + Math.floor(10000 + Math.random() * 90000);
+            const orderTimestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-            let message = `🍽️ *NEW FOOD ORDER - ZAMZAM CAFETERIA*\n\n👤 *Customer:* ${name}\n📍 *Address:* ${address || 'See GPS Pin below'}\n🛵 *Zone:* ${deliveryLocationName}\n`;
-            if (gpsLink) {
-                message += `🗺️ *GPS Pin:* ${gpsLink}\n`;
-            }
-            message += `\n📋 *Order Items:*\n`;
-            cart.forEach((item, index) => {
-                message += `${index + 1}. [#${item.code}] ${item.name} (${item.quantity}x) - AED ${(item.price * item.quantity).toFixed(2)}\n`;
+            const newOrder = {
+                id: orderId,
+                time: orderTimestamp,
+                name: name,
+                address: address || 'GPS Location Pinned',
+                gps: gpsLink || 'Not Provided',
+                zone: deliveryLocationName,
+                items: [...cart],
+                total: subtotal.toFixed(2),
+                status: 'Preparing in Kitchen 🟢'
+            };
+
+            // Save to mock backend orders feed
+            ordersBackend.unshift(newOrder);
+            localStorage.setItem('zamzam_backend_orders', JSON.stringify(ordersBackend));
+            updateOrdersDashboardBadge();
+
+            // Populate Receipt Modal
+            document.getElementById('receipt-order-id').innerText = `Order ID: #${orderId} (${orderTimestamp})`;
+            document.getElementById('receipt-name').innerText = name;
+            document.getElementById('receipt-address').innerText = address || 'GPS Pinned';
+            document.getElementById('receipt-gps').innerText = gpsLink || 'No GPS link provided';
+            document.getElementById('receipt-total').innerText = `AED ${subtotal.toFixed(2)}`;
+
+            const receiptItemsList = document.getElementById('receipt-items-list');
+            receiptItemsList.innerHTML = '';
+            cart.forEach(item => {
+                const row = document.createElement('div');
+                row.className = 'flex justify-between text-stone-300';
+                row.innerHTML = `<span>[#${item.code}] ${item.name} (x${item.quantity})</span><span>AED ${(item.price * item.quantity).toFixed(2)}</span>`;
+                receiptItemsList.appendChild(row);
             });
-            message += `\n💰 *Grand Total (VAT Incl.):* AED ${subtotal.toFixed(2)}\n💳 *Payment:* Cash / Card on Delivery`;
 
-            window.open(`https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
+            // Show Success Modal
+            document.getElementById('order-success-modal').classList.remove('hidden');
+
+            // Clear Cart
+            cart = [];
+            updateCartBadge();
+            renderCartItems();
+            renderCatalog();
         }
 
-        function sendInquiryWhatsApp() {
-            const dept = document.getElementById('rx-dept').value;
-            const name = document.getElementById('rx-name').value.trim();
-            const details = document.getElementById('rx-details').value.trim();
-            if (!name || !details) { alert('Please enter your name and inquiry details.'); return; }
+        function closeSuccessModal() {
+            document.getElementById('order-success-modal').classList.add('hidden');
+        }
 
-            const message = `📞 *ZAMZAM CAFETERIA INQUIRY*\n\n🏷️ *Type:* ${dept}\n👤 *Customer:* ${name}\n📝 *Details:* ${details}`;
-            window.open(`https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
+        function toggleOrdersDashboard() {
+            const modal = document.getElementById('orders-dashboard-modal');
+            modal.classList.toggle('hidden');
+            if (!modal.classList.contains('hidden')) {
+                renderOrdersDashboardList();
+            }
+        }
+
+        function updateOrdersDashboardBadge() {
+            document.getElementById('orders-dashboard-badge').innerText = ordersBackend.length;
+        }
+
+        function renderOrdersDashboardList() {
+            const container = document.getElementById('dashboard-orders-container');
+            container.innerHTML = '';
+            if (ordersBackend.length === 0) {
+                container.innerHTML = `<p class="text-xs text-stone-400 text-center py-8">No direct orders received yet today.</p>`;
+                return;
+            }
+
+            ordersBackend.forEach(ord => {
+                const div = document.createElement('div');
+                div.className = 'bg-dark-900 border border-dark-700 rounded-2xl p-4 space-y-2 text-xs';
+                
+                let itemsHtml = '';
+                ord.items.forEach(it => {
+                    itemsHtml += `<div class="text-stone-300">• [#${it.code}] ${it.name} × ${it.quantity} (AED ${(it.price * it.quantity).toFixed(2)})</div>`;
+                });
+
+                div.innerHTML = `
+                    <div class="flex items-center justify-between pb-2 border-b border-dark-800">
+                        <span class="font-mono font-bold text-gold-400">Order #${ord.id}</span>
+                        <span class="text-stone-400">${ord.time}</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-stone-300">
+                        <div><strong class="text-white">Customer:</strong> ${ord.name}</div>
+                        <div><strong class="text-white">Address:</strong> ${ord.address}</div>
+                        <div class="sm:col-span-2"><strong class="text-white">GPS:</strong> <a href="${ord.gps}" target="_blank" class="text-gold-400 underline">${ord.gps}</a></div>
+                    </div>
+                    <div class="pt-2 border-t border-dark-800/80">
+                        <p class="font-bold text-stone-400 mb-1">Items:</p>
+                        <div class="space-y-0.5">${itemsHtml}</div>
+                    </div>
+                    <div class="flex items-center justify-between pt-2 border-t border-dark-800 font-bold">
+                        <span class="text-emerald-400">${ord.status}</span>
+                        <span class="text-gold-400 text-sm">Total: AED ${ord.total}</span>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function clearAllDashboardOrders() {
+            if (confirm('Clear all orders from the kitchen dashboard?')) {
+                ordersBackend = [];
+                localStorage.removeItem('zamzam_backend_orders');
+                updateOrdersDashboardBadge();
+                renderOrdersDashboardList();
+            }
         }
 
         function toggleAdminModal() { document.getElementById('admin-modal').classList.toggle('hidden'); }
