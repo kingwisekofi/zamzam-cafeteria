@@ -836,3 +836,64 @@
             renderCatalog();
             renderAdminProductList();
             document.getElementById('new-prod-code').value = '';
+            document.getElementById('new-prod-name').value = '';
+            document.getElementById('new-prod-price').value = '';
+            document.getElementById('new-prod-unit').value = '';
+            document.getElementById('new-prod-img').value = '';
+            alert('Dish added to ZamZam menu!');
+        }
+
+        function renderAdminProductList() {
+            const listContainer = document.getElementById('admin-product-list');
+            listContainer.innerHTML = '';
+            products.forEach(p => {
+                const div = document.createElement('div');
+                div.className = 'bg-dark-800 p-3 rounded-lg border border-dark-700 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-sm';
+                div.innerHTML = `
+                    <div>
+                        <p class="font-bold text-white"><span class="text-gold-400">#${p.code}</span> ${p.name}</p>
+                        <p class="text-xs text-stone-400">AED ${Number(p.price).toFixed(2)} • ${p.category}</p>
+                    </div>
+                    <div class="flex items-center gap-2 w-full sm:w-auto">
+                        <input type="text" id="img-input-${p.id}" placeholder="Paste food photo URL" class="bg-dark-900 border border-dark-600 rounded px-2 py-1 text-xs text-white flex-grow sm:w-40">
+                        <button onclick="updateProductImage('${p.id}')" class="bg-gold-500 hover:bg-gold-400 text-dark-950 font-bold px-2.5 py-1 rounded text-xs transition">Img</button>
+                        <button onclick="deleteProduct('${p.id}')" class="bg-crimson-600/20 hover:bg-crimson-600 text-crimson-500 hover:text-white px-2.5 py-1 rounded text-xs transition">Del</button>
+                    </div>
+                `;
+                listContainer.appendChild(div);
+            });
+        }
+
+        function updateProductImage(productId) {
+            const inputVal = document.getElementById(`img-input-${productId}`).value.trim();
+            if (!inputVal) { alert('Please paste a valid image link first.'); return; }
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                product.image = inputVal;
+                localStorage.setItem('zamzam_menu_v1', JSON.stringify(products));
+                renderCatalog();
+                renderAdminProductList();
+                alert('Dish image updated!');
+            }
+        }
+
+        function deleteProduct(productId) {
+            if (confirm('Remove this dish from the menu?')) {
+                products = products.filter(p => p.id !== productId);
+                localStorage.setItem('zamzam_menu_v1', JSON.stringify(products));
+                renderCatalog();
+                renderAdminProductList();
+            }
+        }
+
+        function resetDefaultMenu() {
+            if (confirm('Restore the original ZamZam PDF menu?')) {
+                localStorage.removeItem('zamzam_menu_v1');
+                products = [...defaultMenu];
+                renderCatalog();
+                renderAdminProductList();
+            }
+        }
+    </script>
+</body>
+</html>
