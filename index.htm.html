@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZamZam Restaurant & Cafeteria | Al Warsan, Dubai</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            950: '#0C0A09',
+                            900: '#161311',
+                            800: '#221D1A',
+                            700: '#332B26',
+                        },
+                        crimson: {
+                            500: '#DC2626',
+                            600: '#B91C1C',
+                            700: '#991B1B',
+                        },
+                        gold: {
+                            400: '#FBBF24',
+                            500: '#F59E0B',
+                            600: '#D97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body id="top" class="bg-dark-900 text-stone-100 min-h-screen flex flex-col font-sans">
+
+    <!-- Top Utility Announcement Bar -->
+    <div class="bg-dark-950 border-b border-dark-800 text-xs text-stone-300">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
+            <div class="flex items-center space-x-1.5 text-gold-400 font-medium">
+                <span>🛵</span>
+                <span>FREE HOME DELIVERY • All Prices VAT Inclusive (AED)</span>
+            </div>
+            <div class="font-semibold text-white">
+                Order Desk: <a href="https://wa.me/971554040547" target="_blank" class="text-gold-400 hover:underline">055 404 0547</a> / <a href="tel:045693722" class="text-stone-300 hover:text-white">04 569 3722</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-1 text-stone-400">
+                <svg class="w-3.5 h-3.5 text-crimson-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+                <span>Al Ameera Bldg, Al Warsan 4, Phase 2 - International City, Dubai</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="bg-dark-900/95 backdrop-blur-md border-b border-dark-800 sticky top-0 z-40 shadow-lg">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+            
+            <!-- Brand Logo & Tagline -->
+            <a href="#top" class="flex items-center space-x-3 shrink-0">
+                <div class="w-11 h-11 rounded-full bg-gradient-to-br from-crimson-600 via-dark-950 to-gold-500 border-2 border-gold-400 flex items-center justify-center shadow-lg text-white font-black text-lg">
+                    ZZ
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-lg font-extrabold tracking-wide text-white uppercase leading-tight">
+                        ZAMZAM <span class="text-gold-400">CAFETERIA</span>
+                    </h1>
+                    <p class="text-[10px] tracking-[0.18em] text-stone-400 font-semibold uppercase">WHERE THE FLAVOUR INSPIRED YOU</p>
+                </div>
+            </a>
+
+            <!-- Desktop Quick Navigation -->
+            <nav class="hidden 2xl:flex items-center space-x-4 text-xs font-semibold text-stone-300">
+                <a href="#top" onclick="filterCatalog('all')" class="text-gold-400 hover:text-gold-300 transition">All Menu</a>
+                <a href="#store-catalog" onclick="filterCatalog('charcoal')" class="hover:text-gold-400 transition">🔥 Charcoal</a>
+                <a href="#store-catalog" onclick="filterCatalog('broasted')" class="hover:text-gold-400 transition">🍗 Broasted</a>
+                <a href="#store-catalog" onclick="filterCatalog('biriyani')" class="hover:text-gold-400 transition">🍛 Biriyani</a>
+                <a href="#store-catalog" onclick="filterCatalog('chinese')" class="hover:text-gold-400 transition">🥡 Chinese</a>
+                <a href="#store-catalog" onclick="filterCatalog('indian')" class="hover:text-gold-400 transition">🥘 Indian</a>
+                <a href="#store-catalog" onclick="filterCatalog('sandwiches')" class="hover:text-gold-400 transition">🌯 Burgers & Wraps</a>
+                <a href="#store-catalog" onclick="filterCatalog('juices')" class="hover:text-gold-400 transition">🥤 Juices & Tea</a>
+            </nav>
+
+            <!-- Search Bar & Mobile Cart Jump Button -->
+            <div class="flex items-center space-x-3 flex-grow sm:flex-grow-0 justify-end">
+                <div class="relative hidden sm:block w-52 md:w-64">
+                    <input type="text" id="catalog-search" onkeyup="renderCatalog()" placeholder="Search item # or dish name..." class="w-full bg-dark-800 border border-dark-700 rounded-full pl-9 pr-4 py-2 text-xs text-white placeholder-stone-400 focus:outline-none focus:border-gold-500 transition">
+                    <svg class="w-4 h-4 text-stone-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </div>
+
+                <!-- Scrolls smoothly to the side-by-side / bottom cart panel without dimming the screen -->
+                <a href="#order-cart-panel" class="relative bg-dark-800 hover:bg-dark-700 border border-dark-700 text-white px-3 py-2.5 rounded-xl shadow-lg flex items-center space-x-2 transition">
+                    <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                    <span class="hidden md:inline text-xs font-bold text-stone-200">Order Tray</span>
+                    <span id="cart-badge" class="bg-crimson-600 text-white text-xs font-extrabold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Restaurant Hero Banner -->
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-dark-950 via-dark-800 to-crimson-700/40 border border-gold-500/20 p-6 sm:p-10 mb-8 shadow-2xl">
+            <div class="relative z-10 max-w-3xl">
+                <div class="flex flex-wrap items-center gap-2 mb-4">
+                    <span class="inline-block text-[11px] uppercase tracking-widest text-gold-400 font-bold bg-dark-950/90 px-3.5 py-1.5 rounded-full border border-gold-500/30">
+                        AL WARSAN 4 • INTERNATIONAL CITY
+                    </span>
+                    <span class="inline-block text-[11px] uppercase tracking-widest text-white font-bold bg-crimson-600 px-3 py-1.5 rounded-full">
+                        FREE HOME DELIVERY
+                    </span>
+                </div>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                    Where The Flavour <span class="text-gold-400">Inspired You.</span>
+                </h2>
+                <p class="text-xs sm:text-sm text-stone-300 mt-3 leading-relaxed">
+                    مطعم وكافتيريا زمزم الورسان — Browse the menu on the left and build your order live on the right without losing sight of your dishes. Pin your exact GPS location for fast delivery!
+                </p>
+                <div class="flex flex-wrap items-center gap-2.5 mt-6">
+                    <a href="#store-catalog" onclick="filterCatalog('charcoal')" class="inline-flex items-center space-x-1.5 bg-gold-500 hover:bg-gold-400 text-dark-950 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-lg transition">
+                        <span>🔥</span><span>Charcoal & Grill</span>
+                    </a>
+                    <a href="#store-catalog" onclick="filterCatalog('broasted')" class="inline-flex items-center space-x-1.5 bg-crimson-600 hover:bg-crimson-500 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-lg transition">
+                        <span>🍗</span><span>Broasted Meals</span>
+                    </a>
+                    <a href="#store-catalog" onclick="filterCatalog('juices')" class="inline-flex items-center space-x-1.5 bg-dark-900/90 hover:bg-dark-700 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-dark-600 transition">
+                        <span>🥤</span><span>Fresh Juices & Karak</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Search Bar -->
+        <div class="sm:hidden mb-6">
+            <input type="text" id="catalog-search-mobile" onkeyup="syncSearch(this.value)" placeholder="Search dish name or menu number (e.g. #22, Karak)..." class="w-full bg-dark-800 border border-dark-700 rounded-xl px-4 py-3 text-sm text-white placeholder-stone-400 focus:outline-none focus:border-gold-500">
+        </div>
+
+        <!-- SIDE-BY-SIDE LAYOUT: MENU (LEFT) + LIVE CART (RIGHT) -->
+        <div class="flex flex-col lg:flex-row items-start gap-8 mb-16">
+            
+            <!-- LEFT COLUMN: MENU CATALOG -->
+            <div class="w-full lg:w-[66%] xl:w-[68%]">
+                <!-- Category Filter Tabs -->
+                <div id="store-catalog" class="scroll-mt-24 flex items-center justify-between flex-wrap gap-3 mb-5">
+                    <div class="flex items-center space-x-2 overflow-x-auto no-scrollbar pb-2">
+                        <button onclick="filterCatalog('all')" id="tab-all" class="cat-tab px-3.5 py-2 rounded-xl font-semibold text-xs whitespace-nowrap bg-gold-500 text-dark-950 shadow-md transition">All Menu</button>
+                        <button onclick="filterCatalog('charcoal')" id="tab-charcoal" class="cat-tab px-3.5 py-2 rounded-xl font-medium text-xs whitespace-nowrap bg-dark-800 text-stone-300 hover:bg-dark-700 border border-dark-700 transition">🔥 Charcoal & Grill</button>
+                        <button onclick="filterCatalog('broasted')" id="tab-broasted" class="cat-tab px-3.5 py-2 rounded-xl font-medium text-xs whitespace-nowrap bg-dark-800 text-stone-300 hover:bg-dark-700 border border-dark-700 transition">🍗 Broasted & Strips</button>
+                        <button onclick="filterCatalog('biriyani')" id="tab-biriyani" class="cat-tab px-3.5 py-2 rounded-xl font-medium text-xs whitespace-nowrap bg-dark-800 text-stone-300 hover:bg-dark-700 border border-dark-700 transition">🍛 Biriyani & Rice</button>
+                        <button onclick="filterCatalog('chinese')" id="tab-chinese" class="cat-tab px-3.5 py-2 rounded-xl font-medium text-xs whitespace-nowrap bg-dark-800 text-stone-300 hover:bg-dark-700 border border-dark-700 transition">🥡 Chinese</button>
+                        <button onclick="filterCatalog('indian')" id="tab-indian" class="cat-tab px-3.5 py-2 rounded-xl font-medium text-xs whitespace-nowrap bg-dark-800 text-stone-300 hover:bg-dark-700 border border-dark-700 transition">🥘 Indian & Sri Lankan</button>
+                        <button onclick="filterCatalog('sandwiches')" id="tab-sandwiches" class="cat-tab px-3.5 py-2 rounded-xl font-medium text-xs whitespace-nowrap bg-dark-800 text-stone-300 hover:bg-dark-700 border border-dark-700 transition">🍔 Burgers & Wraps</button>
+                        <button onclick="filterCatalog('breakfast')" id="tab-breakfast" class="cat-tab px-3.5 py-2 rounded-xl font-medium text-xs whitespace-nowrap bg-dark-800 text-stone-300 hover:bg-dark-700 border border-dark-700 transition">🥞 Breakfast & Snacks</button>
+                        <button onclick="filterCatalog('juices')" id="tab-juices" class="cat-tab px-3.5 py-2 rounded-xl font-medium text-xs whitespace-nowrap bg-dark-800 text-stone-300 hover:bg-dark-700 border border-dark-700 transition">🥤 Juices & Tea</button>
+                    </div>
+                    <p id="catalog-count" class="text-xs text-stone-400 font-medium"></p>
+                </div>
+
+                <!-- Product Catalog Grid -->
+                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"></div>
+            </div>
+
+            <!-- RIGHT COLUMN: STICKY SIDE-BY-SIDE ORDER CART & GPS LOCATION -->
+            <aside id="order-cart-panel" class="w-full lg:w-[34%] xl:w-[32%] lg:sticky lg:top-24 scroll-mt-24">
+                <div class="bg-dark-800 border border-dark-700 rounded-3xl shadow-2xl overflow-hidden flex flex-col">
+                    <!-- Cart Header -->
+                    <div class="p-4 bg-dark-950 border-b border-dark-700 flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-lg">🍽️</span>
+                            <h3 class="text-base font-extrabold text-white">Your ZamZam Order</h3>
+                        </div>
+                        <button onclick="clearCart()" class="text-xs text-stone-400 hover:text-crimson-500 transition font-medium">Clear All</button>
+                    </div>
+
+                    <!-- Live Cart Items List -->
+                    <div id="cart-items-container" class="max-h-72 overflow-y-auto p-4 space-y-3 divide-y divide-dark-700/60"></div>
+
+                    <!-- Delivery & GPS Section -->
+                    <div class="p-4 bg-dark-900 border-t border-dark-700 space-y-3.5">
+                        
+                        <!-- Zone Select -->
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-stone-300 mb-1">Delivery Area / Pickup</label>
+                            <select id="delivery-location" onchange="updateCartTotals()" class="w-full bg-dark-800 border border-dark-600 rounded-xl px-3 py-2 text-white text-xs focus:outline-none focus:border-gold-500 transition">
+                                <option value="0">Al Warsan 4 / Phase 2 (FREE Delivery)</option>
+                                <option value="0">International City Clusters (FREE Delivery)</option>
+                                <option value="0">Al Warqa / Nad Al Sheba (FREE Delivery)</option>
+                                <option value="0">Store Pickup - Al Ameera Bldg (AED 0.00)</option>
+                            </select>
+                        </div>
+
+                        <!-- Customer Name & Address -->
+                        <div class="space-y-2">
+                            <input type="text" id="customer-name" placeholder="Your Name & Phone Number *" class="w-full bg-dark-800 border border-dark-600 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-gold-500 transition">
+                            <input type="text" id="customer-address" placeholder="Building Name / Cluster / Flat No. *" class="w-full bg-dark-800 border border-dark-600 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-gold-500 transition">
+                        </div>
+
+                        <!-- GPS Location Pinning Box -->
+                        <div class="bg-dark-800/90 border border-dark-700 rounded-xl p-3 space-y-2">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-gold-400 flex items-center gap-1">
+                                    <span>📍</span> GPS Delivery Pin
+                                </span>
+                                <button type="button" onclick="detectGPSLocation()" id="gps-btn" class="bg-dark-700 hover:bg-gold-500 hover:text-dark-950 text-gold-400 border border-gold-500/30 text-[11px] font-bold px-2.5 py-1 rounded-lg transition flex items-center gap-1">
+                                    <span>🎯</span><span>Share My Live GPS</span>
+                                </button>
+                            </div>
+                            <input type="text" id="customer-gps-link" placeholder="Auto-filled via GPS or paste Google Maps link" class="w-full bg-dark-900 border border-dark-600 rounded-lg px-2.5 py-1.5 text-[11px] text-stone-200 placeholder-stone-500 focus:outline-none focus:border-gold-500 transition">
+                            <p id="gps-status" class="text-[10px] text-stone-400 leading-tight">Tap "Share My Live GPS" so our driver gets your exact Google Maps pin.</p>
+                        </div>
+
+                        <!-- Totals -->
+                        <div class="space-y-1 text-xs pt-2 border-t border-dark-800">
+                            <div class="flex justify-between text-stone-300">
+                                <span>Subtotal (VAT Incl.)</span>
+                                <span id="cart-subtotal" class="font-semibold text-white">AED 0.00</span>
+                            </div>
+                            <div class="flex justify-between text-stone-300">
+                                <span>Home Delivery</span>
+                                <span id="cart-delivery-fee" class="font-semibold text-gold-400">FREE (AED 0.00)</span>
+                            </div>
+                            <div class="flex justify-between text-sm font-extrabold text-white pt-1.5 border-t border-dark-700">
+                                <span>Grand Total</span>
+                                <span id="cart-grand-total" class="text-gold-400">AED 0.00</span>
+                            </div>
+                        </div>
+
+                        <!-- WhatsApp Checkout CTA -->
+                        <button onclick="checkoutWhatsApp()" class="w-full bg-gold-500 hover:bg-gold-400 text-dark-950 font-extrabold py-3 px-4 rounded-xl shadow-lg flex items-center justify-center space-x-2 transition text-sm">
+                            <span>Order Now via WhatsApp</span>
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+
+        <!-- Party Catering / Custom Order Section -->
+        <div id="catering-section" class="scroll-mt-24 bg-dark-800 border border-dark-700 rounded-3xl p-6 sm:p-10 mb-16 shadow-xl">
+            <div class="max-w-2xl mx-auto">
+                <div class="text-center mb-6">
+                    <span class="text-xs uppercase tracking-widest text-gold-400 font-semibold bg-dark-950/60 px-3 py-1 rounded-full border border-gold-500/20">Direct Kitchen & Catering Desk</span>
+                    <h3 class="text-xl sm:text-2xl font-bold text-white mt-3">Party Buckets, Office Lunch & Custom Orders</h3>
+                    <p class="text-sm text-stone-400 mt-1">Planning a gathering in International City or Al Warsan? Send a custom order or inquire about seasonal seafood (ASP) prices directly via WhatsApp.</p>
+                </div>
+                
+                <div class="space-y-4 bg-dark-900 p-5 sm:p-6 rounded-2xl border border-dark-700">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-300 mb-2">Order Type</label>
+                            <select id="rx-dept" class="w-full bg-dark-800 border border-dark-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold-500 transition text-sm">
+                                <option value="Home / Office Delivery">🛵 Home / Office Delivery</option>
+                                <option value="Party Bucket / Majlis Platter">🎉 Party Bucket / Majlis Platter</option>
+                                <option value="Seasonal Fish (Sheri / Hamour) Price Check">🐟 Seasonal Fish (Sheri / Hamour) Inquiry</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-300 mb-2">Your Name</label>
+                            <input type="text" id="rx-name" placeholder="Enter your name" class="w-full bg-dark-800 border border-dark-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold-500 transition text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-stone-300 mb-2">Order Details / Spice Preference</label>
+                        <textarea id="rx-details" rows="3" placeholder="e.g., 2x Party Meals (#26), extra garlic paste, less spicy..." class="w-full bg-dark-800 border border-dark-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold-500 transition text-sm"></textarea>
+                    </div>
+
+                    <button onclick="sendInquiryWhatsApp()" class="w-full bg-crimson-600 hover:bg-crimson-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg transition">
+                        Send Order Inquiry via WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Admin Modal -->
+    <div id="admin-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+        <div class="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity" onclick="toggleAdminModal()"></div>
+        <div class="flex items-center justify-center min-h-screen p-4 relative z-10">
+            <div class="bg-dark-800 border border-dark-700 rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative">
+                <div class="flex items-center justify-between pb-4 border-b border-dark-700 mb-6">
+                    <h3 class="text-xl font-bold text-white">ZamZam Menu Manager</h3>
+                    <button onclick="toggleAdminModal()" class="text-stone-400 hover:text-white p-2 rounded-lg bg-dark-900 hover:bg-dark-700 transition">✕</button>
+                </div>
+
+                <div id="admin-auth-container" class="space-y-4">
+                    <p class="text-sm text-stone-300">Enter admin passcode to add dishes, update prices, or attach food photography.</p>
+                    <input type="password" id="admin-passcode" onkeyup="if(event.key==='Enter') verifyAdmin()" placeholder="Enter passcode" class="w-full bg-dark-900 border border-dark-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold-500 transition">
+                    <button onclick="verifyAdmin()" class="w-full bg-gold-500 hover:bg-gold-400 text-dark-950 font-bold py-3 rounded-xl shadow-lg transition">Unlock Menu Manager</button>
+                </div>
+
+                <div id="admin-panel-content" class="hidden space-y-6">
+                    <div class="bg-dark-900 p-4 rounded-xl border border-dark-700">
+                        <h4 class="text-sm font-bold text-gold-400 uppercase tracking-wide mb-3">Add New Menu Item</h4>
+                        <div class="space-y-3">
+                            <div class="grid grid-cols-3 gap-3">
+                                <input type="text" id="new-prod-code" placeholder="Item # (e.g. 445)" class="bg-dark-800 border border-dark-600 rounded-lg px-3 py-2 text-sm text-white">
+                                <input type="text" id="new-prod-name" placeholder="Dish Name" class="col-span-2 bg-dark-800 border border-dark-600 rounded-lg px-3 py-2 text-sm text-white">
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <select id="new-prod-cat" class="bg-dark-800 border border-dark-600 rounded-lg px-3 py-2 text-sm text-white">
+                                    <option value="charcoal">Charcoal & Grill</option>
+                                    <option value="broasted">Broasted & Strips</option>
+                                    <option value="biriyani">Biriyani & Rice</option>
+                                    <option value="chinese">Chinese & Fried Rice</option>
+                                    <option value="indian">Indian & Sri Lankan</option>
+                                    <option value="sandwiches">Burgers, Club & Poratta</option>
+                                    <option value="breakfast">Breakfast & Snacks</option>
+                                    <option value="juices">Juices, Desserts & Tea</option>
+                                </select>
+                                <input type="number" id="new-prod-price" placeholder="Price (AED)" class="bg-dark-800 border border-dark-600 rounded-lg px-3 py-2 text-sm text-white">
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <input type="text" id="new-prod-unit" placeholder="Portion / Options (e.g. Half / Full)" class="bg-dark-800 border border-dark-600 rounded-lg px-3 py-2 text-sm text-white">
+                                <input type="text" id="new-prod-img" placeholder="Direct Image URL (optional)" class="bg-dark-800 border border-dark-600 rounded-lg px-3 py-2 text-sm text-white">
+                            </div>
+                            <button onclick="addNewProduct()" class="w-full bg-gold-500 hover:bg-gold-400 text-dark-950 font-bold py-2.5 rounded-lg text-sm transition">Add Dish to Menu</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="text-sm font-bold text-stone-300 uppercase tracking-wide">Manage Catalog Items</h4>
+                            <button onclick="resetDefaultMenu()" class="text-xs text-crimson-500 hover:underline">Reset Original Menu</button>
+                        </div>
+                        <div id="admin-product-list" class="space-y-2 max-h-64 overflow-y-auto pr-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark-950 border-t border-dark-800 py-10 mt-auto">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-stone-400 border-b border-dark-800 pb-6">
+                <div>
+                    <p class="font-bold text-white text-sm mb-1">ZamZam Al Warsan Restaurant & Cafeteria</p>
+                    <p>Al Ameera Building, Al Warsan - 4, Phase 2, International City - Dubai</p>
+                    <p class="text-gold-400 mt-1">Free Home Delivery: 04 569 3722 | 055 404 0547 | 055 418 8740</p>
+                </div>
+                <div>
+                    <p class="font-bold text-white text-sm mb-1">Our Sister Branches</p>
+                    <p>• Wadi Zam Zam Restaurant: 064 340 1872</p>
+                    <p>• Shurooq Al Wadi Restaurant: 050 374 5546 / 055 690 922</p>
+                    <p>• Al Safadi Restaurant: 050 248 4004</p>
+                </div>
+                <div>
+                    <p class="font-bold text-white text-sm mb-1">More Group Locations</p>
+                    <p>• Real Choice Cafe: 054 421 2401</p>
+                    <p>• Momo Restaurant: 055 214 2507</p>
+                    <p class="text-stone-300 mt-1">💳 We Accept Visa / Credit & Debit Cards • All Prices VAT Inclusive</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+                <p class="text-xs text-stone-400">© 2026 ZamZam Cafeteria & Restaurant. All Rights Reserved.</p>
+                <button onclick="toggleAdminModal()" class="text-xs bg-dark-800 hover:bg-dark-700 px-3.5 py-2 rounded-lg border border-dark-700 text-gold-400 font-medium transition">Menu Manager</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script Logic -->
+    <script>
+        const STORE_WHATSAPP = '971554040547';
+
+        const defaultMenu = [
+            // CHARCOAL & GRILL (Items 1 - 21)
+            { id: 'zz1', code: '01', name: 'Pepper Chicken Charcoal (Half)', category: 'charcoal', price: 23, unit: 'Half (Full AED 43)', stock: 'in-stock', image: '' },
+            { id: 'zz1f', code: '01B', name: 'Pepper Chicken Charcoal (Full)', category: 'charcoal', price: 43, unit: 'Full', stock: 'in-stock', image: '' },
+            { id: 'zz2', code: '02', name: 'Mix Chicken Charcoal (Half)', category: 'charcoal', price: 23, unit: 'Half (Full AED 43)', stock: 'in-stock', image: '' },
+            { id: 'zz2f', code: '02B', name: 'Mix Chicken Charcoal (Full)', category: 'charcoal', price: 43, unit: 'Full', stock: 'in-stock', image: '' },
+            { id: 'zz3', code: '03', name: 'Peri Peri Chicken Charcoal (Half)', category: 'charcoal', price: 22, unit: 'Half (Full AED 42)', stock: 'in-stock', image: '' },
+            { id: 'zz4', code: '04', name: 'Honey Chicken Charcoal (Half)', category: 'charcoal', price: 23, unit: 'Half (Full AED 43)', stock: 'in-stock', image: '' },
+            { id: 'zz5', code: '05', name: 'Green Chilli Chicken Charcoal (Half)', category: 'charcoal', price: 23, unit: 'Half (Full AED 43)', stock: 'in-stock', image: '' },
+            { id: 'zz6', code: '06', name: 'Dynamite Chicken Charcoal (Half)', category: 'charcoal', price: 23, unit: 'Half (Full AED 43)', stock: 'in-stock', image: '' },
+            { id: 'zz7', code: '07', name: 'Tandoori Chicken Charcoal (Half)', category: 'charcoal', price: 22, unit: 'Half (Full AED 42)', stock: 'in-stock', image: '' },
+            { id: 'zz8', code: '08', name: 'Normal Chicken Charcoal (Half)', category: 'charcoal', price: 22, unit: 'Half (Full AED 42)', stock: 'in-stock', image: '' },
+            { id: 'zz9', code: '09', name: 'Quarter Chicken Charcoal', category: 'charcoal', price: 16, unit: 'Quarter w/ Fries', stock: 'in-stock', image: '' },
+            { id: 'zz10', code: '10', name: 'Chicken Fry Special', category: 'charcoal', price: 18, unit: 'Medium (13 / 18 / 35)', stock: 'in-stock', image: '' },
+            { id: 'zz11', code: '11', name: 'Mix Grill Platter (Small)', category: 'charcoal', price: 30, unit: 'Small (50 / 75 / 100)', stock: 'in-stock', image: '' },
+            { id: 'zz11L', code: '11B', name: 'Mix Grill Family Platter', category: 'charcoal', price: 75, unit: 'Large w/ Soup & Sides', stock: 'in-stock', image: '' },
+            { id: 'zz13', code: '13', name: 'Grilled Hamour', category: 'charcoal', price: 22, unit: 'Portion w/ Fries & Salad', stock: 'in-stock', image: '' },
+            { id: 'zz14', code: '14', name: 'Chicken Tikka', category: 'charcoal', price: 22, unit: 'w/ Soup, Hummus & Bread', stock: 'in-stock', image: '' },
+            { id: 'zz15', code: '15', name: 'Chicken Kabab', category: 'charcoal', price: 20, unit: 'w/ Soup, Hummus & Bread', stock: 'in-stock', image: '' },
+            { id: 'zz16', code: '16', name: 'Mutton Kabab', category: 'charcoal', price: 25, unit: 'w/ Soup, Hummus & Bread', stock: 'in-stock', image: '' },
+            { id: 'zz17', code: '17', name: 'Sheesh Tawook', category: 'charcoal', price: 22, unit: 'w/ Hummus, Garlic & Bread', stock: 'in-stock', image: '' },
+            { id: 'zz18', code: '18', name: 'Grilled Chicken Wings', category: 'charcoal', price: 20, unit: 'w/ Soup, Hummus & Fries', stock: 'in-stock', image: '' },
+            { id: 'zz19', code: '19', name: 'Arayes Chicken / Mutton', category: 'charcoal', price: 20, unit: 'Chicken 20 / Mutton 22', stock: 'in-stock', image: '' },
+            { id: 'zz20', code: '20', name: 'Grilled Lamb Chops', category: 'charcoal', price: 40, unit: 'w/ Soup, Hummus & Bread', stock: 'in-stock', image: '' },
+            { id: 'zz21', code: '21', name: 'Grilled Prawns', category: 'charcoal', price: 40, unit: 'w/ Soup, Hummus & Bread', stock: 'in-stock', image: '' },
+
+            // BROASTED & STRIPS MEALS (Items 22 - 45)
+            { id: 'zz22', code: '22', name: 'Jumbo Broasted Meal (6 Pcs)', category: 'broasted', price: 36, unit: '6 Pcs + Fries + 2 Cola', stock: 'in-stock', image: '' },
+            { id: 'zz23', code: '23', name: 'Mini Family Meal (9 Pcs)', category: 'broasted', price: 53, unit: '9 Pcs + Fries(M) + 1.5L Cola', stock: 'in-stock', image: '' },
+            { id: 'zz24', code: '24', name: 'Family Meal (12 Pcs)', category: 'broasted', price: 63, unit: '12 Pcs + Fries(L) + Cola(L)', stock: 'in-stock', image: '' },
+            { id: 'zz25', code: '25', name: 'Family Bucket (15 Pcs)', category: 'broasted', price: 75, unit: '15 Pcs + Fries(L) + Cola(L)', stock: 'in-stock', image: '' },
+            { id: 'zz26', code: '26', name: 'Party Meal (20 Pcs)', category: 'broasted', price: 98, unit: '20 Pcs + Fries(L) + Cola(L)', stock: 'in-stock', image: '' },
+            { id: 'zz33', code: '33', name: 'Snack Meal (2 Pcs Chicken)', category: 'broasted', price: 14, unit: '2 Pcs + Fries + Bun + Cola', stock: 'in-stock', image: '' },
+            { id: 'zz34', code: '34', name: 'Dinner Meal (4 Pcs Chicken)', category: 'broasted', price: 23, unit: '4 Pcs + Fries + Coleslaw + Cola', stock: 'in-stock', image: '' },
+            { id: 'zz35', code: '35', name: 'Shrimps Meal (8 Pcs)', category: 'broasted', price: 26, unit: '8 Pcs + Fries + Bun + Cola', stock: 'in-stock', image: '' },
+            { id: 'zz36', code: '36', name: 'Party Strips Meal (24 Pcs)', category: 'broasted', price: 92, unit: '24 Strips + Fries(L) + Cola(L)', stock: 'in-stock', image: '' },
+            { id: 'zz37', code: '37', name: 'Family Strips Bucket (15 Pcs)', category: 'broasted', price: 63, unit: '15 Strips + Fries(L) + Cola(L)', stock: 'in-stock', image: '' },
+            { id: 'zz38', code: '38', name: 'Family Strips Meal (12 Pcs)', category: 'broasted', price: 53, unit: '12 Strips + Fries(L) + 1.5L Cola', stock: 'in-stock', image: '' },
+            { id: 'zz39', code: '39', name: 'Mini Strips Family (9 Pcs)', category: 'broasted', price: 42, unit: '9 Strips + Fries(L) + 1.5L Cola', stock: 'in-stock', image: '' },
+            { id: 'zz40', code: '40', name: 'Mini Strips Meal (3 Pcs)', category: 'broasted', price: 15, unit: '3 Strips + Fries + Bun + Cola', stock: 'in-stock', image: '' },
+            { id: 'zz41', code: '41', name: 'Jumbo Strips Meal (6 Pcs)', category: 'broasted', price: 26, unit: '6 Strips + Fries + Bun + Cola', stock: 'in-stock', image: '' },
+            { id: 'zz42', code: '42', name: 'Special Meal (Zinger + 2 Strips)', category: 'broasted', price: 23, unit: 'Zinger + 2 Strips + Fries + Cola', stock: 'in-stock', image: '' },
+            { id: 'zz43', code: '43', name: 'Twister Meal', category: 'broasted', price: 23, unit: 'Tortilla + 1 Pc Chi + Fries + Cola', stock: 'in-stock', image: '' },
+            { id: 'zz44', code: '44', name: 'Big Box Meal', category: 'broasted', price: 75, unit: '4 Chi + 4 Strips + 2 Twister + 2 Zinger', stock: 'in-stock', image: '' },
+            { id: 'zz45', code: '45', name: 'Budget Meal', category: 'broasted', price: 23, unit: 'Zinger + 1 Pc Chi + Fries + Cola', stock: 'in-stock', image: '' },
+
+            // BIRIYANI & RICE COMBOS (Items 46 - 67, 114 - 122)
+            { id: 'zz46', code: '46', name: 'Hyderabadi Biriyani (Chicken)', category: 'biriyani', price: 17, unit: 'Veg 14 / Chi 17 / Mutton 20', stock: 'in-stock', image: '' },
+            { id: 'zz47', code: '47', name: 'Mutton Biriyani', category: 'biriyani', price: 18, unit: 'Full Portion', stock: 'in-stock', image: '' },
+            { id: 'zz48', code: '48', name: 'Chicken Dum Biriyani', category: 'biriyani', price: 13, unit: 'Full Portion', stock: 'in-stock', image: '' },
+            { id: 'zz49', code: '49', name: 'Chicken 65 Biriyani', category: 'biriyani', price: 16, unit: 'Full Portion', stock: 'in-stock', image: '' },
+            { id: 'zz50', code: '50', name: 'Beef Biriyani', category: 'biriyani', price: 16, unit: 'Full Portion', stock: 'in-stock', image: '' },
+            { id: 'zz51', code: '51', name: 'Prawns Biriyani', category: 'biriyani', price: 20, unit: 'Full Portion', stock: 'in-stock', image: '' },
+            { id: 'zz52', code: '52', name: 'King Fish Biriyani', category: 'biriyani', price: 16, unit: 'Full Portion', stock: 'in-stock', image: '' },
+            { id: 'zz53', code: '53', name: 'Chicken Fry Biriyani', category: 'biriyani', price: 15, unit: 'Full Portion', stock: 'in-stock', image: '' },
+            { id: 'zz54', code: '54', name: 'Vegetable Biriyani', category: 'biriyani', price: 12, unit: 'Full Portion', stock: 'in-stock', image: '' },
+            { id: 'zz55', code: '55', name: 'Egg Biriyani', category: 'biriyani', price: 12, unit: 'Full Portion', stock: 'in-stock', image: '' },
+            { id: 'zz59', code: '59', name: 'Chicken Charcoal Biriyani', category: 'biriyani', price: 16, unit: '1 Pc (16 / 26 / 45)', stock: 'in-stock', image: '' },
+            { id: 'zz60', code: '60', name: 'Chicken Tikka with Rice', category: 'biriyani', price: 20, unit: 'Healthy Combo', stock: 'in-stock', image: '' },
+            { id: 'zz61', code: '61', name: 'Chicken Kabab with Rice', category: 'biriyani', price: 20, unit: 'Healthy Combo', stock: 'in-stock', image: '' },
+            { id: 'zz64', code: '64', name: 'Mutton Kabab with Rice', category: 'biriyani', price: 22, unit: 'Healthy Combo', stock: 'in-stock', image: '' },
+            { id: 'zz65', code: '65', name: 'Grilled Hammour Combo', category: 'biriyani', price: 19, unit: 'w/ Rice & Sides', stock: 'in-stock', image: '' },
+            { id: 'zz66', code: '66', name: 'Grilled Chicken Combo', category: 'biriyani', price: 17, unit: 'w/ Rice & Sides', stock: 'in-stock', image: '' },
+            { id: 'zz67', code: '67', name: 'Chicken 65 Combo', category: 'biriyani', price: 22, unit: 'w/ Rice & Sides', stock: 'in-stock', image: '' },
+            { id: 'zz114', code: '114', name: 'Biriyani Rice + 2 Pc Chicken + Cola', category: 'biriyani', price: 23, unit: 'Broasted Combo w/ Fries', stock: 'in-stock', image: '' },
+            { id: 'zz115', code: '115', name: 'Biriyani Rice + 3 Pc Strips + Cola', category: 'biriyani', price: 23, unit: 'Broasted Combo w/ Fries', stock: 'in-stock', image: '' },
+
+            // CHINESE CUISINE, FRIED RICE & NOODLES (Items 85 - 154)
+            { id: 'zz85', code: '85', name: 'Schezwan Noodles (Chicken)', category: 'chinese', price: 16, unit: 'Veg 14 / Chi 16 / Mix 20', stock: 'in-stock', image: '' },
+            { id: 'zz86', code: '86', name: 'Schezwan Fried Rice (Chicken)', category: 'chinese', price: 16, unit: 'Veg 14 / Chi 16 / Mix 20', stock: 'in-stock', image: '' },
+            { id: 'zz87', code: '87', name: 'Triple Fried Rice', category: 'chinese', price: 18, unit: 'Signature Rice & Gravy', stock: 'in-stock', image: '' },
+            { id: 'zz88', code: '88', name: 'Chicken Fried Rice', category: 'chinese', price: 15, unit: 'Full Plate', stock: 'in-stock', image: '' },
+            { id: 'zz89', code: '89', name: 'Mixed Fried Rice', category: 'chinese', price: 18, unit: 'Chicken, Beef & Prawns', stock: 'in-stock', image: '' },
+            { id: 'zz90', code: '90', name: 'Chicken Noodles', category: 'chinese', price: 15, unit: 'Full Plate', stock: 'in-stock', image: '' },
+            { id: 'zz92', code: '92', name: 'Prawns Fried Rice', category: 'chinese', price: 18, unit: 'Full Plate', stock: 'in-stock', image: '' },
+            { id: 'zz100', code: '100', name: 'Beef Chilli + Fried Rice Combo', category: 'chinese', price: 24, unit: 'Rice Combo', stock: 'in-stock', image: '' },
+            { id: 'zz104', code: '104', name: 'Prawns Manchurian + Fried Rice', category: 'chinese', price: 27, unit: 'Rice Combo', stock: 'in-stock', image: '' },
+            { id: 'zz105', code: '105', name: 'Chicken 65 + Fried Rice', category: 'chinese', price: 23, unit: 'Rice Combo', stock: 'in-stock', image: '' },
+            { id: 'zz108', code: '108', name: 'Chicken Chilli + Fried Rice', category: 'chinese', price: 23, unit: 'Rice Combo', stock: 'in-stock', image: '' },
+            { id: 'zz112', code: '112', name: 'Beef Broccoli Mushroom + White Rice', category: 'chinese', price: 22, unit: 'Rice Combo', stock: 'in-stock', image: '' },
+            { id: 'zz123', code: '123', name: 'Chicken Lollipop', category: 'chinese', price: 15, unit: 'Starter Plate', stock: 'in-stock', image: '' },
+            { id: 'zz124', code: '124', name: 'Chicken 65 (Gravy / Dry)', category: 'chinese', price: 16, unit: 'Small 16 / Large 22', stock: 'in-stock', image: '' },
+            { id: 'zz128', code: '128', name: 'Schezwan Chicken', category: 'chinese', price: 16, unit: 'Small 16 / Large 22', stock: 'in-stock', image: '' },
+            { id: 'zz130', code: '130', name: 'Sweet & Sour Chicken', category: 'chinese', price: 16, unit: 'Small 16 / Large 23', stock: 'in-stock', image: '' },
+            { id: 'zz133', code: '133', name: 'Beef Dry Chilli', category: 'chinese', price: 21, unit: 'Small 21 / Large 27', stock: 'in-stock', image: '' },
+            { id: 'zz134', code: '134', name: 'Beef Broccoli', category: 'chinese', price: 18, unit: 'Small 18 / Large 24', stock: 'in-stock', image: '' },
+            { id: 'zz139', code: '139', name: 'Chilli Prawns', category: 'chinese', price: 18, unit: 'Small 18 / Large 28', stock: 'in-stock', image: '' },
+            { id: 'zz149', code: '149', name: 'Gobi Manchurian', category: 'chinese', price: 14, unit: 'Small 14 / Large 18', stock: 'in-stock', image: '' },
+
+            // INDIAN & SRI LANKAN CUISINE (Items 155 - 201, 428 - 443)
+            { id: 'zz155', code: '155', name: 'Chicken Cashewnut', category: 'indian', price: 18, unit: 'Curry Bowl', stock: 'in-stock', image: '' },
+            { id: 'zz163', code: '163', name: 'Chicken Tikka Masala', category: 'indian', price: 17, unit: 'Creamy Tomato Gravy', stock: 'in-stock', image: '' },
+            { id: 'zz164', code: '164', name: 'Kadai Chicken', category: 'indian', price: 16, unit: 'Spicy Capsicum Gravy', stock: 'in-stock', image: '' },
+            { id: 'zz165', code: '165', name: 'Chicken Masala', category: 'indian', price: 14, unit: 'Onion-Tomato Gravy', stock: 'in-stock', image: '' },
+            { id: 'zz166', code: '166', name: 'Butter Chicken', category: 'indian', price: 18, unit: 'Rich & Creamy', stock: 'in-stock', image: '' },
+            { id: 'zz167', code: '167', name: 'Kerala Beef Fry', category: 'indian', price: 16, unit: 'Dark Roasted Style', stock: 'in-stock', image: '' },
+            { id: 'zz168', code: '168', name: 'Beef Roast', category: 'indian', price: 16, unit: 'Curry Bowl', stock: 'in-stock', image: '' },
+            { id: 'zz172', code: '172', name: 'Mutton Kadai', category: 'indian', price: 18, unit: 'Curry Bowl', stock: 'in-stock', image: '' },
+            { id: 'zz173', code: '173', name: 'Mutton Roast', category: 'indian', price: 20, unit: 'Kerala Style Spicy', stock: 'in-stock', image: '' },
+            { id: 'zz177', code: '177', name: 'Mutton Rogan Josh', category: 'indian', price: 20, unit: 'Curry Bowl', stock: 'in-stock', image: '' },
+            { id: 'zz179', code: '179', name: 'Veg Kuruma', category: 'indian', price: 12, unit: 'Coconut-Based Gravy', stock: 'in-stock', image: '' },
+            { id: 'zz180', code: '180', name: 'Palak Paneer', category: 'indian', price: 16, unit: 'Spinach Gravy', stock: 'in-stock', image: '' },
+            { id: 'zz181', code: '181', name: 'Paneer Butter Masala', category: 'indian', price: 16, unit: 'Tomato Butter Gravy', stock: 'in-stock', image: '' },
+            { id: 'zz183', code: '183', name: 'Dal Tadka', category: 'indian', price: 10, unit: 'Lentil Curry', stock: 'in-stock', image: '' },
+            { id: 'zz198', code: '198', name: 'Prawns Masala', category: 'indian', price: 18, unit: 'Spicy Gravy', stock: 'in-stock', image: '' },
+            { id: 'zz199', code: '199', name: 'King Fish Masala', category: 'indian', price: 16, unit: 'Aromatic Fish Curry', stock: 'in-stock', image: '' },
+            { id: 'zz430', code: '430', name: 'Sri Lankan Chicken Kothu', category: 'indian', price: 15, unit: 'Regular 15 / Large 22', stock: 'in-stock', image: '' },
+            { id: 'zz431', code: '431', name: 'Sri Lankan Beef / Mutton Kothu', category: 'indian', price: 18, unit: 'Regular 18 / Large 25', stock: 'in-stock', image: '' },
+            { id: 'zz437', code: '437', name: 'Sri Lankan Chicken Dolphino', category: 'indian', price: 16, unit: 'Regular 16 / Large 22', stock: 'in-stock', image: '' },
+
+            // BURGERS, CLUB SANDWICHES, PORATTA & SHAWARMA (Items 202 - 304)
+            { id: 'zz203', code: '203', name: 'Wagyu Beef Burger', category: 'sandwiches', price: 18, unit: 'Single 18 / Meal 20', stock: 'in-stock', image: '' },
+            { id: 'zz204', code: '204', name: 'Mighty Zinger Burger', category: 'sandwiches', price: 18, unit: 'Single 18 / Meal 20', stock: 'in-stock', image: '' },
+            { id: 'zz209', code: '209', name: 'Zinger Burger', category: 'sandwiches', price: 13, unit: 'Single 13 / Meal 15', stock: 'in-stock', image: '' },
+            { id: 'zz219', code: '219', name: 'Mathafi Combo Sandwich', category: 'sandwiches', price: 18, unit: 'w/ Fries & Drink', stock: 'in-stock', image: '' },
+            { id: 'zz222', code: '222', name: 'Barq Wa Raad Combo', category: 'sandwiches', price: 18, unit: 'w/ Fries & Drink', stock: 'in-stock', image: '' },
+            { id: 'zz234', code: '234', name: 'Majlis Club Sandwich', category: 'sandwiches', price: 35, unit: 'Large Sharing Platter', stock: 'in-stock', image: '' },
+            { id: 'zz235', code: '235', name: 'Family Club Sandwich', category: 'sandwiches', price: 45, unit: 'Family Platter', stock: 'in-stock', image: '' },
+            { id: 'zz239', code: '239', name: 'Shawarma Club Sandwich', category: 'sandwiches', price: 17, unit: 'w/ Fries', stock: 'in-stock', image: '' },
+            { id: 'zz241', code: '241', name: 'Zinger Club Sandwich', category: 'sandwiches', price: 15, unit: 'w/ Fries', stock: 'in-stock', image: '' },
+            { id: 'zz249', code: '249', name: 'F3 Poratta Sandwich', category: 'sandwiches', price: 10, unit: 'Regular 10 / Large 15', stock: 'in-stock', image: '' },
+            { id: 'zz250', code: '250', name: 'PUBG Poratta Sandwich', category: 'sandwiches', price: 10, unit: 'Regular 10 / Large 15', stock: 'in-stock', image: '' },
+            { id: 'zz257', code: '257', name: 'Zinger Poratta', category: 'sandwiches', price: 10, unit: 'Regular 10 / Large 13', stock: 'in-stock', image: '' },
+            { id: 'zz272', code: '272', name: 'Oman Chips Poratta', category: 'sandwiches', price: 4, unit: 'Roll', stock: 'in-stock', image: '' },
+            { id: 'zz274', code: '274', name: 'Mathafi Wrap', category: 'sandwiches', price: 16, unit: 'Tortilla Wrap', stock: 'in-stock', image: '' },
+            { id: 'zz288', code: '288', name: 'Zinger Mathar', category: 'sandwiches', price: 15, unit: 'Special Shawarma', stock: 'in-stock', image: '' },
+            { id: 'zz289', code: '289', name: 'Hassan Mathar', category: 'sandwiches', price: 8, unit: 'Special Shawarma', stock: 'in-stock', image: '' },
+            { id: 'zz292', code: '292', name: 'Arabic Shawarma Plate', category: 'sandwiches', price: 17, unit: 'w/ Garlic, Fries & Pickles', stock: 'in-stock', image: '' },
+            { id: 'zz294', code: '294', name: 'Chicken Shawarma (Regular)', category: 'sandwiches', price: 6.5, unit: 'Khubz Roll', stock: 'in-stock', image: '' },
+            { id: 'zz301', code: '301', name: 'Seafood Pasta', category: 'sandwiches', price: 20, unit: 'Pasta Bowl', stock: 'in-stock', image: '' },
+
+            // BREAKFAST, SOUPS & SNACKS (Items 68 - 84, 305 - 347, 415 - 444)
+            { id: 'zz68', code: '68', name: 'Hot & Sour Chicken Soup', category: 'breakfast', price: 10, unit: 'Bowl', stock: 'in-stock', image: '' },
+            { id: 'zz72', code: '72', name: 'Seafood Soup', category: 'breakfast', price: 13, unit: 'Bowl', stock: 'in-stock', image: '' },
+            { id: 'zz78', code: '78', name: 'Fattoush Salad', category: 'breakfast', price: 12, unit: 'Bowl', stock: 'in-stock', image: '' },
+            { id: 'zz82', code: '82', name: 'Tabbouleh Salad', category: 'breakfast', price: 12, unit: 'Bowl', stock: 'in-stock', image: '' },
+            { id: 'zz305', code: '305', name: 'Chicken Popcorn', category: 'breakfast', price: 15, unit: 'Plate', stock: 'in-stock', image: '' },
+            { id: 'zz306', code: '306', name: 'Peri Peri Fries', category: 'breakfast', price: 8, unit: 'Small 8 / Large 12', stock: 'in-stock', image: '' },
+            { id: 'zz319', code: '319', name: 'Masala Dosa', category: 'breakfast', price: 7, unit: 'w/ Sambar & Chutney', stock: 'in-stock', image: '' },
+            { id: 'zz320', code: '320', name: 'Ghee Roast Dosa', category: 'breakfast', price: 7, unit: 'w/ Sambar & Chutney', stock: 'in-stock', image: '' },
+            { id: 'zz326', code: '326', name: 'Kerala Poratta (1 Pc)', category: 'breakfast', price: 1.5, unit: 'Fresh Flaky Bread', stock: 'in-stock', image: '' },
+            { id: 'zz327', code: '327', name: 'Mysore Masala Dosa', category: 'breakfast', price: 10, unit: 'w/ Sambar & Chutney', stock: 'in-stock', image: '' },
+            { id: 'zz335', code: '335', name: 'Chole Batura', category: 'breakfast', price: 7, unit: 'Breakfast Set', stock: 'in-stock', image: '' },
+            { id: 'zz340', code: '340', name: 'Idli Vada Set', category: 'breakfast', price: 7, unit: 'w/ Sambar & Chutney', stock: 'in-stock', image: '' },
+            { id: 'zz427', code: '427', name: 'Samoosa (Chicken / Veg / Aloo)', category: 'breakfast', price: 1.5, unit: 'Aloo/Veg 1.50 | Chi 2.00', stock: 'in-stock', image: '' },
+            { id: 'zz442', code: '442', name: 'Steam Momos (10 Pcs - Chicken)', category: 'breakfast', price: 18, unit: 'Veg 16 / Chicken 18', stock: 'in-stock', image: '' },
+            { id: 'zz444', code: '444', name: 'Fried Momos (10 Pcs - Chicken)', category: 'breakfast', price: 20, unit: '5 Pcs 14 / 10 Pcs 20', stock: 'in-stock', image: '' },
+
+            // JUICES, DESSERTS & HOT BEVERAGES (Items 348 - 414)
+            { id: 'zz348', code: '348', name: 'Mango Mint Fresh Juice', category: 'juices', price: 10, unit: 'Med (8 / 10 / 12)', stock: 'in-stock', image: '' },
+            { id: 'zz351', code: '351', name: 'Pomegranate Fresh Juice', category: 'juices', price: 10, unit: 'Med (8 / 10 / 12)', stock: 'in-stock', image: '' },
+            { id: 'zz356', code: '356', name: 'Lemon Mint Fresh Juice', category: 'juices', price: 8, unit: 'Med (6 / 8 / 10)', stock: 'in-stock', image: '' },
+            { id: 'zz364', code: '364', name: 'Fresh Mango Juice', category: 'juices', price: 10, unit: 'Med (8 / 10 / 12)', stock: 'in-stock', image: '' },
+            { id: 'zz365', code: '365', name: 'Fresh Avocado Juice', category: 'juices', price: 10, unit: 'Reg 10 / Large 12', stock: 'in-stock', image: '' },
+            { id: 'zz366', code: '366', name: 'Tender Coconut Shake', category: 'juices', price: 10, unit: 'Reg 10 / Large 12', stock: 'in-stock', image: '' },
+            { id: 'zz367', code: '367', name: 'Layered Cocktail Juice', category: 'juices', price: 10, unit: 'Reg 10 / Large 12', stock: 'in-stock', image: '' },
+            { id: 'zz371', code: '371', name: 'Burj Al Arab Special Juice', category: 'juices', price: 15, unit: 'Signature Blend', stock: 'in-stock', image: '' },
+            { id: 'zz372', code: '372', name: 'Burj Dubai Special Juice', category: 'juices', price: 15, unit: 'Signature Blend', stock: 'in-stock', image: '' },
+            { id: 'zz373', code: '373', name: 'Thabakath Layered Juice', category: 'juices', price: 15, unit: 'Multi-Fruit Layers', stock: 'in-stock', image: '' },
+            { id: 'zz377', code: '377', name: 'Vitamin Load Healthy Juice', category: 'juices', price: 15, unit: 'Pineapple, Mango, Grape, Orange', stock: 'in-stock', image: '' },
+            { id: 'zz379', code: '379', name: 'Power Booster Juice', category: 'juices', price: 15, unit: 'Carrot, Apple, Ginger, Orange', stock: 'in-stock', image: '' },
+            { id: 'zz386', code: '386', name: 'Special Falooda', category: 'juices', price: 17, unit: 'Dessert Glass', stock: 'in-stock', image: '' },
+            { id: 'zz396', code: '396', name: 'Passion Fruit Mojito', category: 'juices', price: 10, unit: 'Reg 10 / Large 13', stock: 'in-stock', image: '' },
+            { id: 'zz402', code: '402', name: 'Nutella Crush Shake', category: 'juices', price: 12, unit: 'Reg 12 / Large 15', stock: 'in-stock', image: '' },
+            { id: 'zz405', code: '405', name: 'Family Bottle Juice (1.5L)', category: 'juices', price: 35, unit: '1.5L Fresh Bottle', stock: 'in-stock', image: '' },
+            { id: 'zz409', code: '409', name: 'Fresh Milk Zafran (Saffron)', category: 'juices', price: 5, unit: 'Cup (3 / 5 / 8)', stock: 'in-stock', image: '' },
+            { id: 'zz411', code: '411', name: 'ZamZam Karak Tea', category: 'juices', price: 2, unit: 'Small 2 / Large 3', stock: 'in-stock', image: '' },
+            { id: 'zz412', code: '412', name: 'Fresh Milk Tea', category: 'juices', price: 3, unit: 'Small 3 / Large 5', stock: 'in-stock', image: '' }
+        ];
+
+        let products = JSON.parse(localStorage.getItem('zamzam_menu_v1')) || defaultMenu;
+        let cart = [];
+        let currentFilter = 'all';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCatalog();
+            renderCartItems();
+            updateCartBadge();
+        });
+
+        function syncSearch(val) {
+            document.getElementById('catalog-search').value = val;
+            renderCatalog();
+        }
+
+        function renderCatalog() {
+            const grid = document.getElementById('product-grid');
+            const searchTerm = (document.getElementById('catalog-search')?.value || '').toLowerCase().trim();
+            grid.innerHTML = '';
+
+            const filtered = products.filter(p => {
+                const matchesCat = currentFilter === 'all' || p.category === currentFilter;
+                const matchesSearch = p.name.toLowerCase().includes(searchTerm) || 
+                                      p.code.toLowerCase().includes(searchTerm) ||
+                                      p.unit.toLowerCase().includes(searchTerm) ||
+                                      p.category.toLowerCase().includes(searchTerm);
+                return matchesCat && matchesSearch;
+            });
+
+            document.getElementById('catalog-count').innerText = `Showing ${filtered.length} dish${filtered.length === 1 ? '' : 'es'}`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-stone-400">No matching dishes found. Try searching by dish name or item number.</div>`;
+                return;
+            }
+
+            const categoryMeta = {
+                charcoal: { label: '🔥 Charcoal & Grill', icon: '🍗' },
+                broasted: { label: '🍗 Broasted & Strips', icon: '🍟' },
+                biriyani: { label: '🍛 Biriyani & Rice', icon: '🍛' },
+                chinese: { label: '🥡 Chinese Cuisine', icon: '🥡' },
+                indian: { label: '🥘 Indian & Sri Lankan', icon: '🥘' },
+                sandwiches: { label: '🍔 Burgers & Wraps', icon: '🌯' },
+                breakfast: { label: '🥞 Breakfast & Snacks', icon: '🥟' },
+                juices: { label: '🥤 Juices & Karak', icon: '🍹' }
+            };
+
+            filtered.forEach(p => {
+                const meta = categoryMeta[p.category] || { label: p.category, icon: '🍽️' };
+                const inCart = cart.find(item => item.id === p.id);
+                const qtyBadge = inCart ? `<span class="bg-gold-500 text-dark-950 text-[11px] font-extrabold px-2 py-0.5 rounded-full">${inCart.quantity} in tray</span>` : '';
+
+                const imageHtml = p.image ? 
+                    `<div class="relative mb-3">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-36 object-cover rounded-xl">
+                        <span class="absolute top-2 left-2 bg-dark-950/90 text-gold-400 border border-gold-500/40 text-xs font-extrabold px-2 py-0.5 rounded-lg">#${p.code}</span>
+                     </div>` :
+                    `<div class="relative w-full h-28 bg-dark-900 rounded-xl mb-3 flex items-center justify-center border border-dark-700 text-3xl">
+                        <span>${meta.icon}</span>
+                        <span class="absolute top-2 left-2 bg-dark-950 text-gold-400 border border-gold-500/30 text-xs font-extrabold px-2 py-0.5 rounded-lg">#${p.code}</span>
+                     </div>`;
+
+                const card = document.createElement('div');
+                card.className = `bg-dark-800 border ${inCart ? 'border-gold-500/60' : 'border-dark-700'} rounded-2xl p-3.5 flex flex-col justify-between shadow-lg transition hover:border-gold-500/50`;
+                card.innerHTML = `
+                    <div>
+                        ${imageHtml}
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] uppercase tracking-wider text-stone-400 font-semibold">${meta.label}</span>
+                            ${qtyBadge}
+                        </div>
+                        <h3 class="font-bold text-white text-sm leading-snug mb-1">${p.name}</h3>
+                        <p class="text-[11px] text-stone-400 mb-2.5">${p.unit}</p>
+                    </div>
+                    <div>
+                        <div class="flex items-baseline justify-between mb-2.5 pt-2 border-t border-dark-700/70">
+                            <span class="text-gold-400 font-extrabold text-base">AED ${Number(p.price).toFixed(2)}</span>
+                            <span class="text-[10px] text-stone-400 uppercase">VAT Incl.</span>
+                        </div>
+                        <button onclick="addToCart('${p.id}')" class="w-full bg-crimson-600 hover:bg-crimson-500 active:scale-[0.98] text-white font-bold py-2 px-3 rounded-xl shadow transition text-xs">
+                            + Add to Order
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterCatalog(cat) {
+            currentFilter = cat;
+            document.querySelectorAll('.cat-tab').forEach(tab => {
+                tab.classList.remove('bg-gold-500', 'text-dark-950', 'font-semibold', 'shadow-md');
+                tab.classList.add('bg-dark-800', 'text-stone-300', 'hover:bg-dark-700', 'border', 'border-dark-700');
+            });
+            const activeTab = document.getElementById(`tab-${cat}`);
+            if (activeTab) {
+                activeTab.classList.remove('bg-dark-800', 'text-stone-300', 'hover:bg-dark-700', 'border', 'border-dark-700');
+                activeTab.classList.add('bg-gold-500', 'text-dark-950', 'font-semibold', 'shadow-md');
+            }
+            renderCatalog();
+        }
+
+        // Adds item seamlessly side-by-side without dimming or blocking the menu
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            const existing = cart.find(item => item.id === productId);
+            if (existing) { existing.quantity += 1; } else { cart.push({ ...product, quantity: 1 }); }
+            updateCartBadge();
+            renderCartItems();
+            renderCatalog();
+        }
+
+        function updateQuantity(productId, change) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) { cart = cart.filter(i => i.id !== productId); }
+            }
+            updateCartBadge();
+            renderCartItems();
+            renderCatalog();
+        }
+
+        function clearCart() {
+            if (cart.length === 0) return;
+            if (confirm('Clear all items from your order tray?')) {
+                cart = [];
+                updateCartBadge();
+                renderCartItems();
+                renderCatalog();
+            }
+        }
+
+        function updateCartBadge() {
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-badge').innerText = totalCount;
+        }
+
+        function renderCartItems() {
+            const container = document.getElementById('cart-items-container');
+            container.innerHTML = '';
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 px-2">
+                        <p class="text-2xl mb-1">🛒</p>
+                        <p class="text-xs text-stone-300 font-semibold">Your order tray is empty</p>
+                        <p class="text-[11px] text-stone-400 mt-1">Click "+ Add to Order" on any dish on the left to build your order live.</p>
+                    </div>`;
+                updateCartTotals();
+                return;
+            }
+            cart.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'pt-3 first:pt-0 flex items-center justify-between gap-2';
+                div.innerHTML = `
+                    <div class="pr-2">
+                        <h4 class="font-bold text-white text-xs leading-snug"><span class="text-gold-400">#${item.code}</span> ${item.name}</h4>
+                        <p class="text-[11px] text-stone-300 font-semibold mt-0.5">AED ${(Number(item.price) * item.quantity).toFixed(2)} <span class="text-stone-500 font-normal">(AED ${Number(item.price).toFixed(2)} ea)</span></p>
+                    </div>
+                    <div class="flex items-center space-x-1.5 shrink-0">
+                        <button onclick="updateQuantity('${item.id}', -1)" class="w-6 h-6 bg-dark-700 hover:bg-dark-600 rounded-lg text-white font-bold flex items-center justify-center text-xs">-</button>
+                        <span class="text-xs font-bold w-4 text-center">${item.quantity}</span>
+                        <button onclick="updateQuantity('${item.id}', 1)" class="w-6 h-6 bg-dark-700 hover:bg-dark-600 rounded-lg text-white font-bold flex items-center justify-center text-xs">+</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+            updateCartTotals();
+        }
+
+        function updateCartTotals() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const deliveryFee = parseFloat(document.getElementById('delivery-location').value);
+            const grandTotal = subtotal + deliveryFee;
+            document.getElementById('cart-subtotal').innerText = `AED ${subtotal.toFixed(2)}`;
+            document.getElementById('cart-delivery-fee').innerText = deliveryFee === 0 ? `FREE (AED 0.00)` : `AED ${deliveryFee.toFixed(2)}`;
+            document.getElementById('cart-grand-total').innerText = `AED ${grandTotal.toFixed(2)}`;
+        }
+
+        // HTML5 Geolocation API to generate exact Google Maps pin for delivery
+        function detectGPSLocation() {
+            const statusEl = document.getElementById('gps-status');
+            const gpsInput = document.getElementById('customer-gps-link');
+            const gpsBtn = document.getElementById('gps-btn');
+
+            if (!navigator.geolocation) {
+                statusEl.innerText = 'GPS is not supported by your browser. Please paste your Google Maps link above.';
+                statusEl.className = 'text-[10px] text-crimson-500';
+                return;
+            }
+
+            statusEl.innerText = 'Detecting your GPS coordinates... Please allow location access.';
+            statusEl.className = 'text-[10px] text-gold-400 animate-pulse';
+            gpsBtn.disabled = true;
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const lat = position.coords.latitude.toFixed(6);
+                    const lng = position.coords.longitude.toFixed(6);
+                    const mapsUrl = `https://maps.google.com/?q=${lat},${lng}`;
+                    gpsInput.value = mapsUrl;
+                    statusEl.innerText = `✅ GPS Pinned (${lat}, ${lng}) — Ready to send with order!`;
+                    statusEl.className = 'text-[10px] text-emerald-400 font-medium';
+                    gpsBtn.disabled = false;
+                },
+                (error) => {
+                    let errMsg = 'Unable to get GPS location. Please enable location permissions or paste your Maps link.';
+                    if (error.code === error.PERMISSION_DENIED) {
+                        errMsg = '⚠️ Location permission denied. Enable GPS in browser settings or paste a Maps link.';
+                    }
+                    statusEl.innerText = errMsg;
+                    statusEl.className = 'text-[10px] text-crimson-500';
+                    gpsBtn.disabled = false;
+                },
+                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+            );
+        }
+
+        function checkoutWhatsApp() {
+            if (cart.length === 0) { alert('Your order tray is empty. Add items from the menu first.'); return; }
+            const name = document.getElementById('customer-name').value.trim();
+            const address = document.getElementById('customer-address').value.trim();
+            const gpsLink = document.getElementById('customer-gps-link').value.trim();
+
+            if (!name || (!address && !gpsLink)) {
+                alert('Please enter your Name/Phone and either your Building Address or GPS Pin.');
+                return;
+            }
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const deliverySelect = document.getElementById('delivery-location');
+            const deliveryLocationName = deliverySelect.options[deliverySelect.selectedIndex].text;
+
+            let message = `🍽️ *NEW FOOD ORDER - ZAMZAM CAFETERIA*\n\n👤 *Customer:* ${name}\n📍 *Address:* ${address || 'See GPS Pin below'}\n🛵 *Zone:* ${deliveryLocationName}\n`;
+            if (gpsLink) {
+                message += `🗺️ *GPS Pin:* ${gpsLink}\n`;
+            }
+            message += `\n📋 *Order Items:*\n`;
+            cart.forEach((item, index) => {
+                message += `${index + 1}. [#${item.code}] ${item.name} (${item.quantity}x) - AED ${(item.price * item.quantity).toFixed(2)}\n`;
+            });
+            message += `\n💰 *Grand Total (VAT Incl.):* AED ${subtotal.toFixed(2)}\n💳 *Payment:* Cash / Card on Delivery`;
+
+            window.open(`https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function sendInquiryWhatsApp() {
+            const dept = document.getElementById('rx-dept').value;
+            const name = document.getElementById('rx-name').value.trim();
+            const details = document.getElementById('rx-details').value.trim();
+            if (!name || !details) { alert('Please enter your name and inquiry details.'); return; }
+
+            const message = `📞 *ZAMZAM CAFETERIA INQUIRY*\n\n🏷️ *Type:* ${dept}\n👤 *Customer:* ${name}\n📝 *Details:* ${details}`;
+            window.open(`https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function toggleAdminModal() { document.getElementById('admin-modal').classList.toggle('hidden'); }
+
+        function verifyAdmin() {
+            const inputPass = document.getElementById('admin-passcode').value;
+            if (inputPass === '@Wisekofi01') {
+                document.getElementById('admin-auth-container').classList.add('hidden');
+                document.getElementById('admin-panel-content').classList.remove('hidden');
+                renderAdminProductList();
+            } else { alert('Incorrect passcode.'); }
+        }
+
+        function addNewProduct() {
+            const code = document.getElementById('new-prod-code').value.trim() || 'NEW';
+            const name = document.getElementById('new-prod-name').value.trim();
+            const category = document.getElementById('new-prod-cat').value;
+            const price = parseFloat(document.getElementById('new-prod-price').value);
+            const unit = document.getElementById('new-prod-unit').value.trim() || 'Regular Portion';
+            const image = document.getElementById('new-prod-img').value.trim();
+
+            if (!name || isNaN(price)) { alert('Enter valid dish name and price in AED.'); return; }
+            products.unshift({ id: 'zz_' + Date.now(), code, name, category, price, stock: 'in-stock', unit, image });
+            localStorage.setItem('zamzam_menu_v1', JSON.stringify(products));
+            renderCatalog();
+            renderAdminProductList();
+            document.getElementById('new-prod-code').value = '';
+            document.getElementById('new-prod-name').value = '';
+            document.getElementById('new-prod-price').value = '';
+            document.getElementById('new-prod-unit').value = '';
+            document.getElementById('new-prod-img').value = '';
+            alert('Dish added to ZamZam menu!');
+        }
+
+        function renderAdminProductList() {
+            const listContainer = document.getElementById('admin-product-list');
+            listContainer.innerHTML = '';
+            products.forEach(p => {
+                const div = document.createElement('div');
+                div.className = 'bg-dark-800 p-3 rounded-lg border border-dark-700 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-sm';
+                div.innerHTML = `
+                    <div>
+                        <p class="font-bold text-white"><span class="text-gold-400">#${p.code}</span> ${p.name}</p>
+                        <p class="text-xs text-stone-400">AED ${Number(p.price).toFixed(2)} • ${p.category}</p>
+                    </div>
+                    <div class="flex items-center gap-2 w-full sm:w-auto">
+                        <input type="text" id="img-input-${p.id}" placeholder="Paste food photo URL" class="bg-dark-900 border border-dark-600 rounded px-2 py-1 text-xs text-white flex-grow sm:w-40">
+                        <button onclick="updateProductImage('${p.id}')" class="bg-gold-500 hover:bg-gold-400 text-dark-950 font-bold px-2.5 py-1 rounded text-xs transition">Img</button>
+                        <button onclick="deleteProduct('${p.id}')" class="bg-crimson-600/20 hover:bg-crimson-600 text-crimson-500 hover:text-white px-2.5 py-1 rounded text-xs transition">Del</button>
+                    </div>
+                `;
+                listContainer.appendChild(div);
+            });
+        }
+
+        function updateProductImage(productId) {
+            const inputVal = document.getElementById(`img-input-${productId}`).value.trim();
+            if (!inputVal) { alert('Please paste a valid image link first.'); return; }
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                product.image = inputVal;
+                localStorage.setItem('zamzam_menu_v1', JSON.stringify(products));
+                renderCatalog();
+                renderAdminProductList();
+                alert('Dish image updated!');
+            }
+        }
+
+        function deleteProduct(productId) {
+            if (confirm('Remove this dish from the menu?')) {
+                products = products.filter(p => p.id !== productId);
+                localStorage.setItem('zamzam_menu_v1', JSON.stringify(products));
+                renderCatalog();
+                renderAdminProductList();
+            }
+        }
+
+        function resetDefaultMenu() {
+            if (confirm('Restore the original ZamZam PDF menu?')) {
+                localStorage.removeItem('zamzam_menu_v1');
+                products = [...defaultMenu];
+                renderCatalog();
+                renderAdminProductList();
+            }
+        }
+    </script>
+</body>
+</html>
