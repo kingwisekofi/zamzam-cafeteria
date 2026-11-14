@@ -920,7 +920,7 @@
             const product = products.find(p => p.id === productId);
             if (product) {
                 product.image = inputVal;
-                localStorage.setItem('zamzam_menu_v1'], JSON.stringify(products));
+                localStorage.setItem('zamzam_menu_v1', JSON.stringify(products));
                 renderCatalog();
                 renderAdminProductList();
                 alert('Dish image updated!');
